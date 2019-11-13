@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+constexpr int mod = 1000000007;
+
 struct MMatrix
 {
 	using V = vector < int >;
@@ -11,6 +13,28 @@ struct MMatrix
 	MMatrix ( int n, int mod ) : mod(mod)
 	{
 		mat.assign(n, V(n, 0));
+	}
+	
+	void input()
+	{
+		int n = mat.size();
+		for ( int i = 0; i < n; i++ ) {
+			for ( int j = 0; j < n; j++ ) {
+				cin >> mat[i][j];
+			}
+		}
+	}
+
+	void output()
+	{
+		int n = mat.size();
+		for ( int i = 0; i < n; i++ ) {
+			cout << mat[i][0];
+			for ( int j = 1; j < n; j++ ) {
+				cout << " " << mat[i][j];
+			}
+			cout << endl;
+		}
 	}
 
 	MMatrix operator + ( const MMatrix &d ) const
@@ -56,6 +80,20 @@ struct MMatrix
 		}
 		return ( ret );
 	}
+	
+	V operator * ( const V &d ) const
+	{
+		int n = mat.size();
+		V ret(n);
+		if ( n == d.size() ) {
+			for ( int i = 0; i < n; i++ ) {
+				for ( int k = 0; k < n; k++ ) {
+					ret[i] = ((int64_t)ret[i] + (int64_t)mat[i][k] * d[k]) % mod;
+				}
+			}
+		}
+		return ( ret );
+	}
 
 	MMatrix operator ^ ( int w ) const
 	{
@@ -81,4 +119,17 @@ struct MMatrix
 	}
 };
 
+int main()
+{
 
+	MMatrix a(3, mod), b(3, mod), ans(3, mod);
+	
+	a.input();
+	b.input();
+
+	ans = a * b;
+
+	ans.output();
+
+	return ( 0 );
+}
