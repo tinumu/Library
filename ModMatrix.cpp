@@ -32,9 +32,7 @@ public:
 	
 	constexpr Modint operator / (const Modint &v) const { return ( (*this) * ~v ); }
 
-	Modint &operator = (const uint &v) { return ( dat = Modint(v) ); }
-	Modint &operator = (const u64 &v) { return ( dat = Modint(v) ); }
-	Modint &operator = (const i64 &v) { return ( dat = Modint(v) ); }
+	Modint &operator = (const i64 &v) { return ( (*this) = Modint < mod > (v) ); }
 	Modint &operator += (const Modint &v) { return ( (*this) = (*this) + v ); }
 	Modint &operator -= (const Modint &v) { return ( (*this) = (*this) - v ); }
 	Modint &operator *= (const Modint &v) { return ( (*this) = (*this) * v ); }
