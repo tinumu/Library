@@ -6,5 +6,6 @@
 ・Modint
 ・Matrix
 ・Unionfind
+・BinaryIndexedTree
 
 
