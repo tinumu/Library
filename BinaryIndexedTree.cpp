@@ -30,6 +30,18 @@ struct BIT
 		}
 		return ( sum );
 	}
+
+	int lower_bound(T x)
+	{
+		int l, r;
+		l = -1, r = dat.size();
+		while ( l + 1 < r ) {
+			int m = (l + r) / 2;
+			if ( query(m) >= x ) r = m;
+			else l = m;
+		}
+		return ( r );
+	}
 };
 
 int main()

@@ -23,7 +23,7 @@ public:
 		while ( b > 0 ) {
 			t = a / b;
 			swap(a -= t * b, b);
-			swap(x2 -= t * x1, x1);
+			swap(x1 -= t * x2, x2);
 		}
 		
 		return ( Modint(x1) );
