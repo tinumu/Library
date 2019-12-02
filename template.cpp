@@ -13,5 +13,6 @@ template < typename T > T lcm(T a, T b) { return ( a / gcd(a, b) * b ); }
 
 int main()
 {
-	return ( 0 );
+        return ( 0 );
 }
+
