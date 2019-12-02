@@ -4,32 +4,25 @@ using namespace std;
 const int INF = (1 << 30) - 1;
 
 template < typename T >
-struct Monoid
-{
+struct Monoid {
 	T id;
 	function < T(T, T) > op;
 	Monoid ( T id, function < T(T, T) > op) : id(id), op(op) {}
 };
 
 template < typename T >
-struct SegmentTree
-{
-
+struct SegmentTree {
 	const Monoid < T > monoid;
 	vector < T > dat;
 	int size;
 
-	SegmentTree(int n, Monoid < T > monoid) : monoid(monoid)
-	{
+	SegmentTree(int n, Monoid < T > monoid) : monoid(monoid) {
 		size = 1;
-		while ( size < n ) {
-			size *= 2;
-		}
+		while ( size < n ) size *= 2;
 		dat.assign(size * 2 + 10, monoid.id);
 	}
 
-	void update(int k, T x)
-	{
+	void update(int k, T x) {
 		k += size - 1;
 		dat[k] = x;
 		while ( k > 0 ) {
@@ -38,18 +31,10 @@ struct SegmentTree
 		}
 	}
 	
-	void add(int k, T x)
-	{
-		update(k, monoid.op(x, dat[k + size - 1]));
-	}
+	void add(int k, T x) { update(k, monoid.op(x, dat[k + size - 1])); }
+	T query(int a, int b) { return (query(a, b, 0, 0, size - 1)); }
 
-	T query(int a, int b)
-	{
-		return (query(a, b, 0, 0, size - 1));
-	}
-
-	T query(int a, int b, int k, int l, int r)
-	{
+	T query(int a, int b, int k, int l, int r) {
 		T vl, vr;
 		if ( r < a || b < l ) return ( monoid.id );
 		if ( a <= l && r <= b ) return ( dat[k] );
