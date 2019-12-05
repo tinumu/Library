@@ -13,7 +13,7 @@ struct SegmentTree {
 
 	SegmentTree(int n, T id, function < T(T, T) > op) : id(id), op(op) {
 		size = 1;
-		while ( size < n ) size *= 2;
+		while ( size < n ) size <<= 1;
 		dat.assign(size * 2 + 10, id);
 	}
 
