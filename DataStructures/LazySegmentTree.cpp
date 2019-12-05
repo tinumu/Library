@@ -5,7 +5,7 @@ constexpr int INF = (1 << 30) - 1;
 
 template < typename T, typename E >
 struct LazySegmentTree {
-	
+
 	using F = function < T(T, T) >;
 	using G = function < T(T, E) >;
 	using H = function < T(E, E) >;
@@ -67,9 +67,7 @@ struct LazySegmentTree {
 		dat[k] = x, laz[k] = ei;
 		recalc(k);
 	}
-
-	//[a, b)
-	T query(int a, int b) {
+//[a, b) T query(int a, int b) {
 		int l = a + size, r = b + size;
 		T tl = ti, tr = ti;
 		thrust(l); thrust(r - 1);
