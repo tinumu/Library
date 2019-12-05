@@ -2,7 +2,8 @@
 
 ## うごくもの
 
-・SegmentTree  
+・SegmentTree(非再帰)  
+・遅延SegmentTree(非再帰)  
 ・Modint  
 ・Matrix  
 ・Unionfind  
