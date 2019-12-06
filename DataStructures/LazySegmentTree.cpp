@@ -67,7 +67,8 @@ struct LazySegmentTree {
 		dat[k] = x, laz[k] = ei;
 		recalc(k);
 	}
-//[a, b) T query(int a, int b) {
+//[a, b)
+	T query(int a, int b) {
 		int l = a + size, r = b + size;
 		T tl = ti, tr = ti;
 		thrust(l); thrust(r - 1);
