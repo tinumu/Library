@@ -1,19 +1,20 @@
 # 競プロするときのライブラリ郡
 
-## うごくもの
+適当に書き連ねてるだけなので、あんまり信用性がありません  
+まあ参考程度に見ていって下さい :3  
 
-### データ構造
+## データ構造
 ・SegmentTree(非再帰)  
 ・遅延SegmentTree(非再帰)  
 ・BinaryIndexedTree  
-### グラフ
+## グラフ
 ・Unionfind  
 ・Bellman-Ford  
-### 数学
+## 数学
 ・Matrix  
-### Mod
+## Mod
 ・Modint  
-### 文字列
+## 文字列
 ・RollingHash(弱い)  
 ・RollingHash2D(かなり特殊な例しかつかえない)  
 
