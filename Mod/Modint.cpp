@@ -1,83 +1,86 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template < unsigned mod >
+using ll = long long;
+
+template < unsigned MOD >
 class Modint
 {
 public:
-	using uint = unsigned;
-	using u64 = uint64_t;
-	using i64 = int64_t;
+    using uint = unsigned;
+    using u64 = uint64_t;
+    using i64 = int64_t;
 
-	Modint (const i64 dat = 0) : dat(dat >= 0 ? dat % mod : (mod - (-dat) % mod) % mod) {}
+    Modint (const i64 dat = 0) : dat(dat >= 0 ? dat % MOD : (MOD - (-dat) % MOD) % MOD) {}
 
-	constexpr Modint operator + (const Modint &v) const { return ( Modint(dat + v.dat) ); }
-	constexpr Modint operator - () const { return ( Modint(-((i64)dat)) ); }
-	constexpr Modint operator - (const Modint &v) const { return ( (*this) + -v ); }
-	constexpr Modint operator * (const Modint &v) const { return ( Modint((u64)dat * v.dat) ); }
-	
-	constexpr Modint operator ~ () const
-	{
-		i64 a = dat, b = mod, x1 = 1, x2 = 0, t;
-		
-		while ( b > 0 ) {
-			t = a / b;
-			swap(a -= t * b, b);
-			swap(x1 -= t * x2, x2);
-		}
-		
-		return ( Modint(x1) );
-	}
-	
-	constexpr Modint operator / (const Modint &v) const { return ( (*this) * ~v ); }
+    constexpr Modint operator + (const Modint &v) const { return ( Modint(dat + v.dat) ); }
+    constexpr Modint operator - () const { return ( Modint(-((i64)dat)) ); }
+    constexpr Modint operator - (const Modint &v) const { return ( (*this) + -v ); }
+    constexpr Modint operator * (const Modint &v) const { return ( Modint((u64)dat * v.dat) ); }
 
-	Modint &operator = (const i64 &v) { return ( (*this) = Modint < mod > (v) ); }
-	Modint &operator += (const Modint &v) { return ( (*this) = (*this) + v ); }
-	Modint &operator -= (const Modint &v) { return ( (*this) = (*this) - v ); }
-	Modint &operator *= (const Modint &v) { return ( (*this) = (*this) * v ); }
-	Modint &operator /= (const Modint &v) { return ( (*this) = (*this) / v ); }
+    constexpr Modint operator ~ () const {
+        i64 a = dat, b = MOD, x1 = 1, x2 = 0, t;
 
-	constexpr Modint operator ^ (u64 n) const
-	{
-		Modint < mod > ret(1), mul(dat);
-		while ( n > 0 ) {
-			if ( n & 1 ) ret *= mul;
-			mul *= mul;
-			n >>= 1;
-		}
-		return ( ret );
-	}
-	
-	bool operator == (const Modint &v) { return ( dat == v.dat ); }
-	bool operator != (const Modint &v) { return ( dat != v.dat ); }
+        while ( b > 0 ) {
+            t = a / b;
+            swap(a -= t * b, b);
+            swap(x1 -= t * x2, x2);
+        }
 
-	friend ostream& operator << (ostream &os, const Modint &p )
-	{
-		return ( os << p.dat );
-	}
-	
-	friend istream& operator >> (istream &is, Modint &p )
-	{
-		i64 data;
-		is >> data;
-		p = Modint < mod >(data);
-		return ( is );
-	}
+        return ( Modint(x1) );
+    }
+
+    constexpr Modint operator / (const Modint &v) const { return ( (*this) * ~v ); }
+
+    Modint &operator = (const i64 &v) { return ( (*this) = Modint < MOD > (v) ); }
+    Modint &operator += (const Modint &v) { return ( (*this) = (*this) + v ); }
+    Modint &operator -= (const Modint &v) { return ( (*this) = (*this) - v ); }
+    Modint &operator *= (const Modint &v) { return ( (*this) = (*this) * v ); }
+    Modint &operator /= (const Modint &v) { return ( (*this) = (*this) / v ); }
+
+    constexpr Modint operator ^ (u64 n) const {
+        Modint < MOD > ret(1), mul(dat);
+        while ( n > 0 ) {
+            if ( n & 1 ) ret *= mul;
+            mul *= mul;
+            n >>= 1;
+        }
+        return ( ret );
+    }
+
+    bool operator == (const Modint &v) { return ( dat == v.dat ); }
+    bool operator != (const Modint &v) { return ( dat != v.dat ); }
+
+    friend ostream& operator << (ostream &os, const Modint &p ) {
+        return ( os << p.dat );
+    }
+
+    friend istream& operator >> (istream &is, Modint &p ) {
+        i64 data;
+        is >> data;
+        p = Modint < MOD >(data);
+        return ( is );
+    }
 
 private:
-	uint dat;
+    uint dat;
 };
 
-int main()
-{
-	Modint < 5 > a, b, c;
-	
-	cin >> a >> b >> c;
 
-	cout << a + b + c << endl;
-	cout << a * b * c << endl;
-	
-	cout << ~a << endl;
-	
-	return ( 0 );
+template < unsigned MOD >
+Modint < MOD > fact(int n)
+{
+    static vector < Modint < MOD > > memo = {1};
+    if ( memo.size() < n ) memo.resize(n + 1);
+    if ( memo[n] == Modint < MOD >(0) ) {
+        if ( n >= 2 ) memo[n] = Modint < MOD >(n) * fact< MOD >(n - 1);
+        else memo[n] = 1;
+    }
+    return ( memo[n] );
+}
+
+template < unsigned MOD >
+Modint < MOD > Choose(int n, int r)
+{
+    return ( fact<MOD>(n) / fact<MOD>(r) / fact<MOD>(n - r) );
 }
