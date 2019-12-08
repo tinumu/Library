@@ -17,4 +17,4 @@
 ## 文字列
 ・RollingHash(弱い)  
 ・RollingHash2D(かなり特殊な例しかつかえない)  
-
+・Z-algorithm
