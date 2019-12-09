@@ -66,21 +66,3 @@ private:
     uint dat;
 };
 
-
-template < unsigned MOD >
-Modint < MOD > fact(int n)
-{
-    static vector < Modint < MOD > > memo = {1};
-    if ( memo.size() < n ) memo.resize(n + 1);
-    if ( memo[n] == Modint < MOD >(0) ) {
-        if ( n >= 2 ) memo[n] = Modint < MOD >(n) * fact< MOD >(n - 1);
-        else memo[n] = 1;
-    }
-    return ( memo[n] );
-}
-
-template < unsigned MOD >
-Modint < MOD > Choose(int n, int r)
-{
-    return ( fact<MOD>(n) / fact<MOD>(r) / fact<MOD>(n - r) );
-}

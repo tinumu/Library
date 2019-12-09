@@ -14,6 +14,7 @@
 ・Matrix  
 ## Mod
 ・Modint  
+・二項係数  
 ## 文字列
 ・RollingHash(弱い)  
 ・RollingHash2D(かなり特殊な例しかつかえない)  
