@@ -7,6 +7,7 @@ struct Edge {
     T cost;
     Edge () {}
     Edge (int from, int to, T cost ) : from(from), to(to), cost(cost) {}
+	Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
 };
 
 template < typename T >
