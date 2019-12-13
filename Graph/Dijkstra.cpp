@@ -25,7 +25,7 @@ vector<T> Dijkstra(int V, vector<vector<Edge<T>>> &G, int s) {
 			int cost = e.cost + node.first;
 			if (cost < d[e.to]) {
 				d[e.to] = cost;
-				pq.emplace(e.to, cost);
+				pq.emplace(cost, e.to);
 			}
 		}
 	}
