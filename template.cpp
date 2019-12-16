@@ -2,9 +2,12 @@
 using namespace std;
 
 using ll = long long;
-using Pi = pair < int, int >;
+using Pi = pair<int, int>;
+using Pl = pair<ll, ll>;
+using vint = vector<int>;
 
 constexpr int INF = (1 << 30) - 1;
+constexpr ll LLINF = 1LL << 60;
 constexpr int dy[] = { 1, 0, -1, 0, 1, -1, -1, 1 };
 constexpr int dx[] = { 0, 1, 0, -1, 1, 1, -1, -1 };
 
@@ -13,6 +16,6 @@ template < typename T > T lcm(T a, T b) { return ( a / gcd(a, b) * b ); }
 
 int main()
 {
-        return ( 0 );
+	return ( 0 );
 }
 
