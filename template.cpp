@@ -17,6 +17,8 @@ constexpr int mod = 1000000007;
 
 template<typename T> T gcd(T a, T b) { return (b ? gcd(b, a % b) : a); }
 template<typename T> T lcm(T a, T b) { return (a / gcd(a, b) * b); }
+template<typename T1, typename T2> inline void chmin(T1 &a, T2 b) { if (a > b) a = b; }
+template<typename T1, typename T2> inline void chmax(T1 &a, T2 b) { if (a < b) a = b; }
 
 int main() {
 
