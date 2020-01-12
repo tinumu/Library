@@ -3,9 +3,9 @@ using namespace std;
 
 //This is a Z_algorithm code=============================
 
-vector < int > Z_algorithm(string &W) {
+vector<int> Z_algorithm(string &W) {
     int i = 1, j = 0;
-    vector < int > Z(W.size());
+    vector<int> Z(W.size());
     Z[0] = W.size();
     while (i < W.size()) {
         while (i + j < W.size() && W[i + j] == W[j]) ++j;
@@ -18,6 +18,20 @@ vector < int > Z_algorithm(string &W) {
     return (Z);
 }
 
+vector<int> Z_algorithm(vector<int> &W) {
+    int i = 1, j = 0;
+    vector<int> Z(W.size());
+    Z[0] = W.size();
+    while (i < W.size()) {
+        while (i + j < W.size() && W[i + j] == W[j]) ++j;
+        Z[i] = j; 
+        if (j == 0) { ++i; continue; }
+        int k = 1;
+        while (Z[k] + k < j) Z[i + k] = Z[k], ++k;
+        i += k, j -= k;
+    }
+    return (Z);
+}
 //=======================================================
 
 //verified https://atcoder.jp/contests/arc060/tasks/arc060_d

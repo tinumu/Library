@@ -122,9 +122,8 @@ int main()
 	Matrix < int > a(3), b(3), ans(3);
 	
 	a.input();
-	b.input();
 
-	ans = a * b;
+	ans = a^4;
 
 	ans.output();
 

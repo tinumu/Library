@@ -190,7 +190,7 @@ int main()
 {
 	constexpr int mod = 1000000007;
 
-	Matrix < Modint < 5 > > a(3), b(3), ans(3);
+	Matrix < Modint < mod > > a(3), b(3), ans(3);
 	
 	a.input();
 	b.input();
