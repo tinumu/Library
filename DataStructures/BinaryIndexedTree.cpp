@@ -1,39 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template < typename T > 
+template<typename T> 
 struct BIT {
-	vector < T > dat;
+	vector<T> dat;
 
 	BIT (int n) { dat.assign(n + 1, 0); }
-	
+
 	void add(int k, T x) {
-		k++;
-		while ( k <= dat.size() ) dat[k] += x, k += k & -k;
+		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
 	}
 
 	T query(int k) {
 		T sum = 0;
-		k++;
-		while ( k > 0 ) sum += dat[k], k -= k & -k;
-		return ( sum );
+		for (++k; k > 0; k -= k & -k) sum += dat[k];
+		return (sum);
 	}
 
 	int lower_bound(T x) {
 		int l, r;
 		l = -1, r = dat.size();
-		while ( l + 1 < r ) {
+		while (l + 1 < r) {
 			int m = (l + r) / 2;
-			if ( query(m) >= x ) r = m;
+			if (query(m) >= x) r = m;
 			else l = m;
 		}
-		return ( r );
+		return (r);
 	}
 };
 
-int main()
-{
-	BIT < int > bit(100);
+int main() {
+	BIT<int> bit(100);
 
 	return ( 0 );
 }
