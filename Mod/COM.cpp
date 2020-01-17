@@ -1,14 +1,14 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using i64 = long long;
+using ll = long long;
 
 constexpr int MAX = 1010000;
 constexpr int MOD = 1000000007;
 
 //Please set MAX and MOD!!========================================
 
-i64 fac[MAX], finv[MAX], inv[MAX];
+ll fac[MAX], finv[MAX], inv[MAX];
 
 void COMinit() {
 	fac[0] = fac[1] = 1;
@@ -21,7 +21,7 @@ void COMinit() {
 	}
 }
 
-i64 COM(int n, int k) {
+ll COM(int n, int k) {
 	if (n < k || n < 0 || k < 0) return (0);
 	return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD);
 }
