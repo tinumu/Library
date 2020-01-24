@@ -21,6 +21,27 @@ template<typename T> T lcm(T a, T b) { return (a / gcd(a, b) * b); }
 template<typename T1, typename T2> inline void chmin(T1 &a, T2 b) { if (a > b) a = b; }
 template<typename T1, typename T2> inline void chmax(T1 &a, T2 b) { if (a < b) a = b; }
 
+template<typename T>
+ostream& operator <<(ostream &os, vector<T> &v) {
+	for (auto &u : v) os << u << endl;
+	return (os);
+}
+
+template<typename T>
+istream& operator >>(istream &is, pair<vector<T>&, int> v) {
+	while (v.second--) {
+		T a;
+		v.first.push_back(is >> a, a);
+	}
+	return (is);
+}
+
+template<typename T>
+istream& operator >>(istream &is, vector<T> &v) {
+	for (auto &u : v) is >> u;
+	return (is);
+}
+
 int main() {
 
     return (0);
