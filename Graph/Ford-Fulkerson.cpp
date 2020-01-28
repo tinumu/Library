@@ -55,6 +55,7 @@ struct FordFulkerson {
 //Please copy above code!
 
 //verify用のソースコードはei1333さんのものを借りました
+//verified with http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
 int main() {
     int V, E;
     scanf("%d %d", &V, &E);

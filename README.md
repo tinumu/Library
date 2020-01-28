@@ -12,6 +12,7 @@
 ・Bellman-Ford  
 ・Dijkstra  
 ・Ford-Fulkerson  
+・Dinic  
 ## 数学
 ・Matrix  
 ## Mod
