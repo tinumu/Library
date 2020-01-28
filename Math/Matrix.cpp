@@ -91,13 +91,11 @@ struct Matrix {
 
 	Matrix operator ^ ( int w ) const {
 		Matrix ret = I(), pad = *this;
-		
 		while (w) {
 			if (w & 1) ret = ret * pad;
 			pad = pad * pad;
 			w >>= 1;
 		}
-
 		return (ret);
 	}
 
