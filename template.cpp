@@ -6,6 +6,9 @@ using Pi = pair<int, int>;
 using Pl = pair<ll, ll>;
 using vint = vector<int>;
 using vll = vector<ll>;
+using uint = unsigned int;
+using ull = unsigned long long;
+
 template<typename T> using uset = unordered_set<T>;
 template<typename T1, typename T2> using umap = unordered_map<T1, T2>;
 
