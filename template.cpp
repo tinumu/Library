@@ -26,17 +26,8 @@ template<typename T1, typename T2> inline void chmax(T1 &a, T2 b) { if (a < b) a
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
-	for (auto &u : v) os << u << endl;
+	for (auto &u : v) os << u << el;
 	return (os);
-}
-
-template<typename T>
-istream& operator >>(istream &is, pair<vector<T>&, int> v) {
-	while (v.second--) {
-		T a;
-		v.first.push_back(is >> a, a);
-	}
-	return (is);
 }
 
 template<typename T>
