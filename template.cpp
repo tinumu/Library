@@ -47,5 +47,5 @@ istream& operator >>(istream &is, vector<T> &v) {
 
 int main() {
 
-    return (0);
+	return (0);
 }
