@@ -15,7 +15,6 @@ struct Dinic {
 	vector<vector<Edge>> G;
 	vector<int> level, itr;
 	const T INF;
-	int timestamp;
 	int V;
 
 	Dinic(int size) : V(size), INF(numeric_limits<T>::max()), timestamp(0) {
