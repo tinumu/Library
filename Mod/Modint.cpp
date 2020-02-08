@@ -4,8 +4,7 @@ using namespace std;
 using ll = long long;
 
 template < unsigned MOD >
-class Modint
-{
+class Modint {
 public:
     using uint = unsigned;
     using u64 = uint64_t;

@@ -6,6 +6,9 @@ using Pi = pair<int, int>;
 using Pl = pair<ll, ll>;
 using vint = vector<int>;
 using vll = vector<ll>;
+using uint = unsigned int;
+using ull = unsigned long long;
+
 template<typename T> using uset = unordered_set<T>;
 template<typename T1, typename T2> using umap = unordered_map<T1, T2>;
 
@@ -23,17 +26,8 @@ template<typename T1, typename T2> inline void chmax(T1 &a, T2 b) { if (a < b) a
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
-	for (auto &u : v) os << u << endl;
+	for (auto &u : v) os << u << el;
 	return (os);
-}
-
-template<typename T>
-istream& operator >>(istream &is, pair<vector<T>&, int> v) {
-	while (v.second--) {
-		T a;
-		v.first.push_back(is >> a, a);
-	}
-	return (is);
 }
 
 template<typename T>
@@ -44,5 +38,5 @@ istream& operator >>(istream &is, vector<T> &v) {
 
 int main() {
 
-    return (0);
+	return (0);
 }
