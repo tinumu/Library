@@ -20,3 +20,5 @@
 ・RollingHash(弱い)  
 ・RollingHash2D(かなり特殊な例しかつかえない)  
 ・Z-algorithm
+## 幾何
+・幾何template(作成中です)
