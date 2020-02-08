@@ -3,7 +3,7 @@ using namespace std;
 
 using Pi = pair<int, int>;
 
-template < typename T >
+template<typename T>
 struct Edge {
     int from, to;
     T cost;
@@ -12,7 +12,7 @@ struct Edge {
     Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
 };
 
-template < typename T >
+template<typename T>
 vector<T> Dijkstra(int V, const vector<vector<Edge<T>>> &G, int s) {
     using Node = pair<T, int>;
     constexpr T INF = numeric_limits<T>::max();
