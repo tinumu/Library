@@ -36,6 +36,12 @@ istream& operator >>(istream &is, vector<T> &v) {
 	return (is);
 }
 
+template<typename T1, typename T2>
+istream& operator >>(istream &is, pair<T1, T2> &p) {
+	is >> p.first >> p.second;
+	return (is);
+}
+
 int main() {
 
 	return (0);
