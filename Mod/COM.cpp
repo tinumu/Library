@@ -3,7 +3,7 @@ using namespace std;
 
 using ll = long long;
 
-constexpr int MAX = 1010000;
+constexpr int MAX = 3010000;
 constexpr int MOD = 1000000007;
 
 //Please set MAX and MOD!!========================================
