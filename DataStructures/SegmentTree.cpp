@@ -7,11 +7,11 @@ template<typename T>
 struct SegmentTree {
 	
 	T id;
-	function <T(T, T)> op;
+	function<T(T, T)> op;
 	vector<T> dat;
 	int size;
 
-	SegmentTree(int n, T id, function <T(T, T)> op) : id(id), op(op) {
+	SegmentTree(int n, T id, function<T(T, T)> op) : id(id), op(op) {
 		size = 1;
 		while (size < n) size <<= 1;
 		dat.assign(size * 2 + 10, id);
