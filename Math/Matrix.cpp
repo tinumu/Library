@@ -7,6 +7,7 @@ template<typename T>
 struct Matrix {
 	using V = vector<T>;
 	using VV = vector<V>;
+	using u64 = unsigned long long;
 	VV mat;
      
 	Matrix (int n) {
@@ -35,7 +36,7 @@ struct Matrix {
         return (os);
 	}
 
-	Matrix operator + ( const Matrix &d ) const {
+	Matrix operator + (const Matrix &d) const {
 		int n = mat.size();
 		Matrix ret(n);
 		if (n == d.mat.size()) {
@@ -89,7 +90,7 @@ struct Matrix {
 		return (ret);
 	}
 
-	Matrix operator ^ ( int w ) const {
+	Matrix operator ^ (u64 w) const {
 		Matrix ret = I(), pad = *this;
 		while (w) {
 			if (w & 1) ret = ret * pad;
