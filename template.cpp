@@ -8,6 +8,8 @@ using vint = vector<int>;
 using vvint = vector<vint>;
 using vvvint = vector<vvint>;
 using vll = vector<ll>;
+using vvll = vector<vll>;
+using vvvll = vecto<vvll>;
 using uint = unsigned int;
 using ull = unsigned long long;
 
