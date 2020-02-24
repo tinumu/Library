@@ -5,7 +5,7 @@ template<typename T>
 struct BIT {
 	vector<T> dat;
 
-	BIT (int n) { dat.assign(n + 1, 0); }
+	BIT (int n) { dat.assign(n+1, 0); }
 
 	void add(int k, T x) {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
@@ -31,6 +31,5 @@ struct BIT {
 
 int main() {
 	BIT<int> bit(100);
-
-	return ( 0 );
+	return (0);
 }
