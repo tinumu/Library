@@ -45,7 +45,15 @@ istream& operator >>(istream &is, pair<T1, T2> &p) {
 	return (is >> p.first >> p.second);
 }
 
-int main() {
 
+void Main() {
+
+}
+
+int main() {
+	cin.tie(0);
+	ios::sync_with_stdio(0);
+	cout << fixed << setprecision(20);
+	Main();
 	return (0);
 }
