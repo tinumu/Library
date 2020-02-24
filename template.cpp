@@ -9,7 +9,7 @@ using vvint = vector<vint>;
 using vvvint = vector<vvint>;
 using vll = vector<ll>;
 using vvll = vector<vll>;
-using vvvll = vecto<vvll>;
+using vvvll = vector<vvll>;
 using uint = unsigned int;
 using ull = unsigned long long;
 
