@@ -32,14 +32,14 @@ inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
-	for (auto &u : v) os << u << el;
+	os << v[0];
+	for (int i = 1; i < v.size(); i++) os << " " << v[i];
 	return (os);
 }
 
 template<typename T>
 istream& operator >>(istream &is, vector<T> &v) {
-	for (auto &u : v) is >> u;
-	return (is);
+	for (auto &u : v) is >> u; return (is);
 }
 
 template<typename T1, typename T2>
