@@ -29,6 +29,6 @@
 ・RollingHash2D(かなり特殊な例しかつかえない)  
 ・Z-algorithm
 ## 幾何
-・幾何template(作成中です)
+・幾何template(Circleの交差判定と交点作成ができます)  
 ## 実装
 ・サイコロ(こわい)  
