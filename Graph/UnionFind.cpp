@@ -1,3 +1,6 @@
+#include <bits/stdc++.h>
+using namespace std;
+
 struct Unionfind {
 	vector<int> data;
 
@@ -19,3 +22,17 @@ struct Unionfind {
 		data[y] = x;
 	}
 };
+
+//verified with https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/1/DSL_1_A
+int main() {
+	int n, q;
+	cin >> n >> q;
+	Unionfind tree(n);
+	for (int i = 0; i < q; i++) {
+		int c, x, y;
+		cin >> c >> x >> y;
+		if (c == 0) tree.unite(x, y);
+		else cout << tree.same(x, y) << endl;
+	}
+	return (0);
+}
