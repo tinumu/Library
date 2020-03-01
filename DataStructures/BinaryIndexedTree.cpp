@@ -16,6 +16,11 @@ struct BIT {
 		for (++k; k > 0; k -= k & -k) sum += dat[k];
 		return (sum);
 	}
+	
+	//[l, r]
+	T fold(int l, int r) {
+		return (query(r) - (l > 0 ? query(l-1) : 0));
+	}
 
 	int lower_bound(T x) {
 		int l, r;
@@ -31,5 +36,8 @@ struct BIT {
 
 int main() {
 	BIT<int> bit(100);
+	for (int i = 0; i < 100; i++) bit.add(i, 1);
+	cout << bit.fold(3, 5) << endl;
+
 	return (0);
 }
