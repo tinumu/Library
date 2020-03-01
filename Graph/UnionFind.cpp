@@ -1,22 +1,21 @@
 struct Unionfind {
-	vector<int> par;
+	vector<int> data;
 
-	Unionfind(int n) {
-		par = vector<int>(n);
-		for (int i = 0; i < n; i++) par[i] = i;
+	Unionfind(int n) { data.assign(n, -1); }
+
+	int root(int n) {
+		if (data[n] < 0) return (n);
+		return (data[n] = root(data[n]));
 	}
+
+	int size(int n) { return (-data[root(n)]); };
+	bool same(int x, int y) { return (root(x) == root(y)); }
 
 	void unite(int x, int y) {
 		x = root(x), y = root(y);
 		if (x == y) return;
-		par[x] = y;
-	}
-
-	bool same(int x, int y) {
-		return (root(x) == root(y));
-	}
-
-	int root(int n) {
-		return (par[n] = (par[n] == n ? n : root(par[n])));
+		if (data[x] > data[y]) swap(x, y);
+		data[x] += data[y];
+		data[y] = x;
 	}
 };
