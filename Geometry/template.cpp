@@ -24,9 +24,13 @@ struct V2 {
 	}
 
 	V2 rotate90() const { return (V2(y, -x)); }
+	V2 normalized() const { return (*this / norm()); }
+
 	double dot(const V2 &p) const { return (x*p.x + y*p.y); }
 	double cross(const V2 &p) const { return (x*p.y - y*p.x); }
+	double arg() const { return (atan2(y, x)); }
 };
+V2 polar(double r, double a) { return (V2(cos(a) * r, sin(a) * r)); }
 
 using Polygon = vector<V2>;
 struct Segment {
@@ -36,11 +40,32 @@ struct Segment {
 };
 
 using Line = Segment;
+
 struct Circle {
-	V2 c;
+	V2 o;
 	double r;
 	Circle() {}
-	Circle(V2 c, double r) : c(c), r(r) {}
-};
+	Circle(V2 o, double r) : o(o), r(r) {}
 
+	int intersects(const Circle &c) {
+		double d = (o-c.o).norm();
+		if (d + c.r < r) return (3); //contain on A
+		if (d + r < c.r) return (-3); //contain on B
+		if (equals(d + c.r, r)) return (1);  //inscribed on A
+		if (equals(d + r, c.r)) return (-1); //inscribed on B
+		if (r + c.r < d) return (0); //circumscribed
+		if (equals(r + c.r, d)) return (4); //far 
+		return (2); //intersected
+	}
+
+	vector<V2> crossPoints(const Circle &c) {
+		int inter = intersects(c);
+		if (abs(inter) == 3 || inter == 0) return (vector<V2>());
+		double d = (c.o-o).norm();
+		double t = (c.o-o).arg();
+		if (abs(inter) == 1 || inter == 4) return ((vector<V2>){o + (c.o-o).normalized() * r});
+		double a = acos((r*r + d*d - c.r*c.r) / (2*r*d));
+		return ((vector<V2>){o + polar(r, t+a), o + polar(r, t-a)});
+	}
+};
 
