@@ -2,41 +2,45 @@
 using namespace std;
 
 constexpr double EPS = 1e-10;
-bool equals(double a, double b) { return (fabs(a - b) < EPS); }
+bool equals(double a, double b) { return (abs(a - b) < EPS); }
 
-struct Point {
+struct V2 {
 	double x, y;
-	Point(double x = 0, double y = 0) : x(x), y(y) {}
+	V2(double x = 0, double y = 0) : x(x), y(y) {}
 	
-	Point operator + (Point p) { return (Point(x + p.x, y + p.y)); }
-	Point operator - (Point p) { return (Point(x - p.x, y - p.y)); }
-	Point operator * (double r) { return (Point(x * r, y * r)); }
-	Point operator / (double r) { return (Point(x / r, y / r)); }
+	V2 operator + (V2 p) const { return (V2(x + p.x, y + p.y)); }
+	V2 operator - (V2 p) const { return (V2(x - p.x, y - p.y)); }
+	V2 operator * (double r) const { return (V2(x * r, y * r)); }
+	V2 operator / (double r) const { return (V2(x / r, y / r)); }
 	
-	double abs() { return (sqrt(norm())); }
-	double norm() { return (x*x + y*y); }
+	double norm() const { return (sqrt(sqrNorm())); }
+	double sqrNorm() const { return (x*x + y*y); }
 	
-	bool operator < (const Point &p) const { 
+	bool operator < (const V2 &p) const { 
 		return (x != p.x ? x < p.x : y < p.y); 
 	}
-	bool operator == (const Point &p) const {
+	bool operator == (const V2 &p) const {
 		return (equals(x, p.x) && equals(y, p.y));
 	}
+
+	V2 rotate90() const { return (V2(y, -x)); }
+	double dot(const V2 &p) const { return (x*p.x + y*p.y); }
+	double cross(const V2 &p) const { return (x*p.y - y*p.x); }
 };
 
-using Vector = Point;
-using Polygon = vector<Point>;
+using Polygon = vector<V2>;
 struct Segment {
-	Point p1, p2;
+	V2 p1, p2;
 	Segment() {}
-	Segment(Point p1, Point p2) : p1(p1), p2(p2) {}
+	Segment(V2 p1, V2 p2) : p1(p1), p2(p2) {}
 };
+
 using Line = Segment;
 struct Circle {
-	Point c;
+	V2 c;
 	double r;
 	Circle() {}
-	Circle(Point c, double r) : c(c), r(r) {}
+	Circle(V2 c, double r) : c(c), r(r) {}
 };
 
 
