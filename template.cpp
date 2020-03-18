@@ -32,6 +32,10 @@ template<typename T1, typename T2>
 inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
+template<typename T>
+bool isin(T y, T x, T h, T w) { return (0 <= y && 0 <= x && y < h && x < w); }
+template<typename T>
+bool isin1(T y, T x, T h, T w) { return (0 < y && 0 < x && y <= h && x <= w); }
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
