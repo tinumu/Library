@@ -100,6 +100,20 @@ struct Circle {
 	}
 };
 
+//多角形は半時計回りに与えられるものとする
+//verified with https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/all/CGL_3_B
+bool isConvex(const Polygon &data) {
+	int size = data.size();
+	for (int i = 0; i < size; i++) {
+		int j = i+1, k = i+2;
+		if (j >= size) j -= size;
+		if (k >= size) k -= size;
+		if (ccw(data[i], data[j], data[k]) == CLOCKWISE) {
+			return (false);
+		}
+	}
+	return (true);
+}
 
 Polygon ConvexHull(Polygon data) {
 	int size = data.size();
@@ -127,3 +141,9 @@ Polygon ConvexHull(Polygon data) {
 	return (l);
 }
 
+int main() {
+	int N; cin >> N;
+	Polygon points(N);
+	for (auto &p : points) cin >> p.x >> p.y;
+	cout << isConvex(points) << endl;
+}
