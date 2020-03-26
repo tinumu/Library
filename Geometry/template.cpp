@@ -36,7 +36,9 @@ struct V2 {
 	double cross(const V2 &p) const { return (x*p.y - y*p.x); }
 	double arg() const { return (atan2(y, x)); }
 };
+
 V2 polar(double r, double a) { return (V2(cos(a) * r, sin(a) * r)); }
+
 int ccw(V2 p0, V2 p1, V2 p2) {
 	V2 a = p1-p0, b = p2-p0;
 	if (a.cross(b) > EPS) return (COUNTER_CLOCKWISE);
@@ -45,7 +47,23 @@ int ccw(V2 p0, V2 p1, V2 p2) {
 	if (a.sqrNorm() < b.sqrNorm()) return (ONLINE_FRONT);
 	return (ON_SEGMENT);
 }
+
+
 using Polygon = vector<V2>;
+
+//verified with https://onlinejudge.u-aizu.ac.jp/courses/library/4/CGL/all/CGL_3_C 
+int containP(const Polygon &g, V2 p) {
+	int size = g.size();
+	bool x = false;
+	for (int i = 0; i < size; i++) {
+		V2 a = g[i]-p, b = g[(i+1)%size]-p;
+		if (abs(a.cross(b)) < EPS && a.dot(b) < EPS) return (1);
+		if (a.y > b.y) swap(a, b);
+		x ^= (a.y < EPS && EPS < b.y && a.cross(b) > EPS);
+	}
+	return (x ? 2 : 0);
+}
+
 struct Segment {
 	V2 p1, p2;
 	Segment() {}
@@ -82,6 +100,7 @@ struct Circle {
 	}
 };
 
+
 Polygon ConvexHull(Polygon data) {
 	int size = data.size();
 	Polygon u, l;
@@ -107,3 +126,4 @@ Polygon ConvexHull(Polygon data) {
 	}
 	return (l);
 }
+
