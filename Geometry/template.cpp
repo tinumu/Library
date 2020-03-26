@@ -2,6 +2,12 @@
 using namespace std;
 
 constexpr double EPS = 1e-10;
+constexpr int COUNTER_CLOCKWISE = 1;
+constexpr int CLOCKWISE = -1;
+constexpr int ONLINE_BACK = 2;
+constexpr int ONLINE_FRONT = -2;
+constexpr int ON_SEGMENT = 0;
+
 bool equals(double a, double b) { return (abs(a - b) < EPS); }
 
 struct V2 {
@@ -31,7 +37,14 @@ struct V2 {
 	double arg() const { return (atan2(y, x)); }
 };
 V2 polar(double r, double a) { return (V2(cos(a) * r, sin(a) * r)); }
-
+int ccw(V2 p0, V2 p1, V2 p2) {
+	V2 a = p1-p0, b = p2-p0;
+	if (a.cross(b) > EPS) return (COUNTER_CLOCKWISE);
+	if (a.cross(b) < -EPS) return (CLOCKWISE);
+	if (a.dot(b) < -EPS) return (ONLINE_BACK);
+	if (a.sqrNorm() < b.sqrNorm()) return (ONLINE_FRONT);
+	return (ON_SEGMENT);
+}
 using Polygon = vector<V2>;
 struct Segment {
 	V2 p1, p2;
@@ -69,3 +82,28 @@ struct Circle {
 	}
 };
 
+Polygon ConvexHull(Polygon data) {
+	int size = data.size();
+	Polygon u, l;
+	sort(begin(data), end(data));
+	if (size < 3) return (data);
+	u.push_back(data[0]); u.push_back(data[1]);
+	l.push_back(data[size-1]); l.push_back(data[size-2]);
+	for (int i = 2; i < size; i++) {
+		for (int sz = u.size(); sz > 1 && ccw(u[sz-2], u[sz-1], data[i]) != CLOCKWISE; sz--) {
+			u.pop_back();
+		}
+		u.push_back(data[i]);
+	}
+	for (int i = size-3; i >= 0; i--) {
+		for (int sz = l.size(); sz > 1 && ccw(l[sz-2], l[sz-1], data[i]) != CLOCKWISE; sz--) {
+			l.pop_back();
+		}
+		l.push_back(data[i]);
+	}
+	reverse(begin(l), end(l));
+	for (int i = u.size()-2; i >= 1; i--) {
+		l.push_back(u[i]);
+	}
+	return (l);
+}
