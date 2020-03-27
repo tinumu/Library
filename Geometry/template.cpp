@@ -140,10 +140,3 @@ Polygon ConvexHull(Polygon data) {
 	}
 	return (l);
 }
-
-int main() {
-	int N; cin >> N;
-	Polygon points(N);
-	for (auto &p : points) cin >> p.x >> p.y;
-	cout << isConvex(points) << endl;
-}
