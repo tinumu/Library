@@ -42,7 +42,8 @@ ostream& operator <<(ostream &os, vector<T> &v) {
 
 template<typename T>
 istream& operator >>(istream &is, vector<T> &v) {
-	for (auto &u : v) is >> u; return (is);
+	for (auto &u : v) is >> u;
+	return (is);
 }
 
 template<typename T1, typename T2>
