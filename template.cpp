@@ -25,13 +25,17 @@ constexpr int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
 constexpr int dx[] = {0, 1, 0, -1, 1, 1, -1, -1};
 constexpr char el = '\n';
 constexpr int mod = 1000000007;
-
+constexpr int mod2 = 998244353;
 template<typename T> T gcd(T a, T b) { return (b ? gcd(b, a % b) : a); }
 template<typename T> T lcm(T a, T b) { return (a / gcd(a, b) * b); }
 template<typename T1, typename T2>
 inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
+template<typename T>
+bool isin(T y, T x, T h, T w) { return (0 <= y && 0 <= x && y < h && x < w); }
+template<typename T>
+bool isin1(T y, T x, T h, T w) { return (0 < y && 0 < x && y <= h && x <= w); }
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
