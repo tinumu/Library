@@ -8,7 +8,7 @@ struct LazySegmentTree {
 
 	using F = function < T(T, T) >;
 	using G = function < T(T, E) >;
-	using H = function < T(E, E) >;
+	using H = function < E(E, E) >;
 	F f;
 	G g;
 	H h;
