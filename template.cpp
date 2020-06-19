@@ -32,6 +32,14 @@ template<typename T1, typename T2>
 inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
+
+template<typename T = ll>
+vector<T> makeVector(size_t a, T b) { return (vector<T>(a, b)); }
+template<typename... Ts>
+auto makeVector(size_t a, Ts... ts) { 
+	return (vector<decltype(makeVector(ts...))>(a, makeVector(ts...)));
+}
+
 template<typename T>
 bool isin(T y, T x, T h, T w) { return (0 <= y && 0 <= x && y < h && x < w); }
 template<typename T>
