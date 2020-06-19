@@ -33,7 +33,7 @@ inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
 
-template<typename T = ll>
+template<typename T>
 vector<T> makeVector(size_t a, T b) { return (vector<T>(a, b)); }
 template<typename... Ts>
 auto makeVector(size_t a, Ts... ts) { 
