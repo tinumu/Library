@@ -25,8 +25,13 @@ ll COM(int n, int k) {
 	if (n < k || n < 0 || k < 0) return (0);
 	return (fac[n] * (finv[k] * finv[n - k] % MOD) % MOD);
 }
+
+ll PERM(int n, int k) {
+	if (n < k || n < 0 || k < 0) return (0);
+	return (fac[n] * finv[n - k] % MOD);
+}
+
 //end=============================================================
-//verified https://atcoder.jp/contests/abc145/tasks/abc145_d
 
 int main()
 {
