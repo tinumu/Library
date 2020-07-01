@@ -47,8 +47,10 @@ bool isin1(T y, T x, T h, T w) { return (0 < y && 0 < x && y <= h && x <= w); }
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
-	os << v[0];
-	for (int i = 1; i < v.size(); i++) os << " " << v[i];
+	if (v.size()) {
+		os << v[0];
+		for (int i = 1; i < v.size(); i++) os << " " << v[i];
+	}
 	return (os);
 }
 
