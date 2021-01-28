@@ -34,6 +34,7 @@ struct Die {
 	}
 };
 
+//verified with https://onlinejudge.u-aizu.ac.jp/courses/lesson/2/ITP1/11/ITP1_11_A
 int main() {
 	int u, f, r, l, b, d;
 	string S;
