@@ -28,7 +28,7 @@ struct SegmentTree {
 		T tl = id, tr = id;
 		for (int l = a + size, r = b + size; l < r; l >>= 1, r >>= 1) {
 			if (l & 1) tl = op(tl, dat[l++]);
-			if (r & 1) tr = op(tr, dat[--r]);
+			if (r & 1) tr = op(dat[--r], tr);
 		}
 		return (op(tl, tr));
 	}
