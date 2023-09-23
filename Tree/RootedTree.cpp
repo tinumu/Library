@@ -4,7 +4,6 @@ using namespace std;
 //veryfied with https://atcoder.jp/contests/abc235/tasks/abc235_e (MST+1)
 //汎用性は今の所あんまないかも...
 //木が辺のみの処理で、辺の構造が可換なモノイドのときはつかえる。
-//非可換なときはまだ試してない。一応計算できるようには書いているとは思うけど
 //更新クエリには対応していない
 
 template<typename Edge_t>
@@ -48,14 +47,19 @@ struct RootedTree {
 	void doubling() {
 		for (int b = 1; b < bsize; b++) {
 			for (int i = 0; i < size; i++) {
-				parent[i][b].to = parent[max(0, parent[i][b-1].to)][b-1].to;
-				parent[i][b].cost = op(parent[i][b-1].cost, parent[max(0, parent[i][b-1].to)][b-1].cost);
+				if (parent[i][b-1].to == -1) {
+					parent[i][b].to = -1;
+					parent[i][b].cost = id;
+				} else {
+					parent[i][b].to = parent[parent[i][b-1].to][b-1].to;
+					parent[i][b].cost = op(parent[i][b-1].cost, parent[parent[i][b-1].to][b-1].cost);
+				}
 			}
 		}
 	}
 
-	void build() {
-		makeDepthAndParent(0, -1, id, 0);
+	void build(int root) {
+		makeDepthAndParent(root, -1, id, 0);
 		doubling();
 	}
 
@@ -88,23 +92,23 @@ struct RootedTree {
 	}
 
 	Edge_t query(int u, int v) {
-		Edge_t retu = id, retv = id;
+		Edge_t ret = id;
 		int r = lca(u, v);
 		int sau = depth[u] - depth[r];
 		int sav = depth[v] - depth[r];
 
 		for (int b = 0; b < bsize; b++) {
 			if ((sau>>b)&1) {
-				retu = op(retu, parent[u][b].cost);
+				ret = op(ret, parent[u][b].cost);
 				u = parent[u][b].to;
 			}
 			if ((sav>>b)&1) {
-				retv = op(parent[v][b].cost, retv);
+				ret = op(ret, parent[v][b].cost);
 				v = parent[v][b].to;
 			}
 		}
 
-		return (op(retu, retv));
+		return (ret);
 	}
 };
 
@@ -137,6 +141,9 @@ struct Unionfind {
 
 
 int main() {
+	cin.tie(0);
+	ios::sync_with_stdio(0);
+
 	int N, M, Q; cin >> N >> M >> Q;
 	Unionfind tree(N);
 	vector<tuple<int, int, int>> edges;
@@ -154,7 +161,7 @@ int main() {
 		}
 	}
 
-	rtree.build();
+	rtree.build(0);
 	while (Q--) {
 		int u, v;
 		long long w; cin >> u >> v >> w; --u, --v;
