@@ -15,7 +15,7 @@ struct Edge {
 template<typename T>
 vector<T> Dijkstra(int V, const vector<vector<Edge<T>>> &G, int s) {
     using Node = pair<T, int>;
-    constexpr T INF = numeric_limits<T>::max();
+    constexpr T INF = numeric_limits<T>::max()/2;
     vector<T> d(V, INF);
     priority_queue<Node, vector<Node>, greater<Node>> pq;
 
