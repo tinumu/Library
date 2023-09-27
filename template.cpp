@@ -20,7 +20,7 @@ template<typename T> using uset = unordered_set<T>;
 template<typename T1, typename T2> using umap = unordered_map<T1, T2>;
 
 constexpr int INF = (1 << 30) - 1;
-constexpr ll LLINF = 2e18;
+constexpr ll LLINF = 4e18;
 constexpr int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
 constexpr int dx[] = {0, 1, 0, -1, 1, 1, -1, -1};
 constexpr char el = '\n';

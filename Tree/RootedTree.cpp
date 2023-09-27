@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//veryfied with https://atcoder.jp/contests/abc235/tasks/abc235_e (MST+1)
 //汎用性は今の所あんまないかも...
 //木が辺のみの処理で、辺の構造が可換なモノイドのときはつかえる。
 //更新クエリには対応していない
@@ -10,9 +9,9 @@ template<typename Edge_t>
 struct RootedTree {
 	struct Edge {
 		int to;
-		Edge_t cost;
+		Edge_t weight;
 		Edge () {}
-		Edge (int to, Edge_t cost) : to(to), cost(cost) {}
+		Edge (int to, Edge_t weight) : to(to), weight(weight) {}
 	};
 
 	int size, bsize;
@@ -30,17 +29,17 @@ struct RootedTree {
 		parent = decltype(parent)(N, vector<Edge>(bsize));
 	}
 	
-	void add_edge(int from, int to, Edge_t cost) {
-		G[from].emplace_back(to, cost);
-		G[to].emplace_back(from, cost);
+	void add_edge(int from, int to, Edge_t weight) {
+		G[from].emplace_back(to, weight);
+		G[to].emplace_back(from, weight);
 	}
 	
-	void makeDepthAndParent(int u, int p, Edge_t cost, int d) {
+	void makeDepthAndParent(int u, int p, Edge_t weight, int d) {
 		depth[u] = d;
-		parent[u][0] = Edge(p, cost);
+		parent[u][0] = Edge(p, weight);
 		for (auto &v : G[u]) {
 			if (v.to == p) continue;
-			makeDepthAndParent(v.to, u, v.cost, d+1);
+			makeDepthAndParent(v.to, u, v.weight, d+1);
 		}
 	}
 
@@ -49,10 +48,10 @@ struct RootedTree {
 			for (int i = 0; i < size; i++) {
 				if (parent[i][b-1].to == -1) {
 					parent[i][b].to = -1;
-					parent[i][b].cost = id;
+					parent[i][b].weight = id;
 				} else {
 					parent[i][b].to = parent[parent[i][b-1].to][b-1].to;
-					parent[i][b].cost = op(parent[i][b-1].cost, parent[parent[i][b-1].to][b-1].cost);
+					parent[i][b].weight = op(parent[i][b-1].weight, parent[parent[i][b-1].to][b-1].weight);
 				}
 			}
 		}
@@ -71,24 +70,16 @@ struct RootedTree {
 		for (int b = 0; b < bsize; b++) {
 			if ((sa>>b)&1) v = parent[v][b].to;
 		}
-
-		int ng = -1, ok = depth[u];
-		while (abs(ng-ok) > 1) {
-			int back = (ng+ok)/2;
-			int nu = u, nv = v;
-			for (int b = 0; b < bsize; b++) {
-				if ((back>>b)&1) {
-					nu = parent[nu][b].to;
-					nv = parent[nv][b].to;
-				}
+		if (u == v) return (u);
+	
+		for (int b = bsize-1; b >= 0; b--) {
+			if (parent[u][b].to != parent[v][b].to) {
+				u = parent[u][b].to;
+				v = parent[v][b].to;
 			}
-			if (nu == nv) ok = back;
-			else ng = back;
 		}
-		for (int b = 0; b < bsize; b++) {
-			if ((ok>>b)&1) u = parent[u][b].to;
-		}
-		return (u);
+
+		return (parent[u][0].to);
 	}
 
 	Edge_t query(int u, int v) {
@@ -99,11 +90,11 @@ struct RootedTree {
 
 		for (int b = 0; b < bsize; b++) {
 			if ((sau>>b)&1) {
-				ret = op(ret, parent[u][b].cost);
+				ret = op(ret, parent[u][b].weight);
 				u = parent[u][b].to;
 			}
 			if ((sav>>b)&1) {
-				ret = op(ret, parent[v][b].cost);
+				ret = op(ret, parent[v][b].weight);
 				v = parent[v][b].to;
 			}
 		}
@@ -114,6 +105,7 @@ struct RootedTree {
 
 //ここまで======================================================================
 
+//veryfied with https://atcoder.jp/contests/abc235/tasks/abc235_e (MST+1)
 //ここからverify用のコード======================================================
 struct Unionfind {
 	vector<int> data;
