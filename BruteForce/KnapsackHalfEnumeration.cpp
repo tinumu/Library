@@ -11,7 +11,7 @@ using namespace std;
 
 //=====================================================================================
 template<typename T> 
-inline vector<pair<T, T>> merge(vector<pair<T, T>> &a, vector<pair<T, T>> &b, T W) {
+inline vector<pair<T, T>> knapsackMerge(vector<pair<T, T>> &a, vector<pair<T, T>> &b, T W) {
         vector<pair<T, T>> ans;
         int i = 0, j = 0;
         T vmax = -1, wmax = -1;
@@ -62,7 +62,7 @@ long long knapsack(int N, T W, vector<pair<T, T>> &A) {
 				dat.emplace_back(X[j].first+x[i].first, X[j].second+x[i].second);
 			}
 		}
-		X = merge(X, dat, W);
+		X = knapsackMerge(X, dat, W);
 	}
 
 	Y.emplace_back(0, 0);
@@ -74,7 +74,7 @@ long long knapsack(int N, T W, vector<pair<T, T>> &A) {
 				dat.emplace_back(Y[j].first+y[i].first, Y[j].second+y[i].second);
 			}
 		}
-		Y = merge(Y, dat, W);
+		Y = knapsackMerge(Y, dat, W);
 	}
 
 	reverse(begin(Y), end(Y));        
