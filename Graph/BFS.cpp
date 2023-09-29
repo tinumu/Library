@@ -5,36 +5,36 @@ using Pi = pair<int, int>;
 
 template<typename T>
 struct Edge {
-    int from, to;
-    T cost;
-    Edge () {}
-    Edge (int from, int to, T cost) : from(from), to(to), cost(cost) {}
-    Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
+	int from, to;
+	T cost;
+	Edge () {}
+	Edge (int from, int to, T cost) : from(from), to(to), cost(cost) {}
+	Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
 };
 
 template<typename T>
 vector<T> BFS(int V, const vector<vector<Edge<T>>> &G, int s) {
-    using Node = pair<T, int>;
-    constexpr T INF = numeric_limits<T>::max();
-    vector<T> d(V, INF);
-    deque<Node> deq;
+	using Node = pair<T, int>;
+	constexpr T INF = numeric_limits<T>::max();
+	vector<T> d(V, INF);
+	deque<Node> deq;
 
-    d[s] = 0;
-    deq.emplace_back(0, s);
-    while (!deq.empty()) {
-        Node node = deq.front(); deq.pop_front();
-        if (d[node.second] < node.first) continue;
-        for (auto &e : G[node.second]) {
-            T cost = e.cost + node.first;
-            if (cost < d[e.to]) {
-                d[e.to] = cost;
-                if (e.cost == 0) deq.emplace_front(cost, e.to);
+	d[s] = 0;
+	deq.emplace_back(0, s);
+	while (!deq.empty()) {
+		Node node = deq.front(); deq.pop_front();
+		if (d[node.second] < node.first) continue;
+		for (auto &e : G[node.second]) {
+			T cost = e.cost + node.first;
+			if (cost < d[e.to]) {
+				d[e.to] = cost;
+				if (e.cost == 0) deq.emplace_front(cost, e.to);
 				else deq.emplace_back(cost, e.to);
-            }
-        }
-    }
+			}
+		}
+	}
 
-    return (d);
+	return (d);
 }
 
 //verified with https://atcoder.jp/contests/abc176/tasks/abc176_d
@@ -74,5 +74,5 @@ int main() {
 		cout << d[v] << endl;
 	}
 
-    return (0);
+	return (0);
 }
