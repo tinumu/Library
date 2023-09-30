@@ -18,6 +18,8 @@ using ull = unsigned long long;
 
 template<typename T> using uset = unordered_set<T>;
 template<typename T1, typename T2> using umap = unordered_map<T1, T2>;
+template<typename T> using maxHeap = priority_queue<T>;
+template<typename T> using minHeap = priority_queue<T, vector<T>, greater<T>>;
 
 constexpr int INF = (1 << 30) - 1;
 constexpr ll LLINF = 4e18;
@@ -44,6 +46,10 @@ template<typename T>
 bool isin(T y, T x, T h, T w) { return (0 <= y && 0 <= x && y < h && x < w); }
 template<typename T>
 bool isin1(T y, T x, T h, T w) { return (0 < y && 0 < x && y <= h && x <= w); }
+template<typename T>
+T cross2D(T ax, T ay, T bx, T by) { return (ax*by - bx*ay); }
+template<typename T>
+T dot2D(T ax, T ay, T bx, T by) { return (ax*bx + ay*by); }
 
 template<typename T>
 ostream& operator <<(ostream &os, vector<T> &v) {
