@@ -74,7 +74,7 @@ struct LazySegmentTree {
 		thrust(l); thrust(r - 1);
 		while (l < r) {
 			if (l & 1) tl = f(tl, reflect(l++));
-			if (r & 1) tr = f(tr, reflect(--r));
+			if (r & 1) tr = f(reflect(--r), tr);
 			l >>= 1, r >>= 1;
 		}
 		return (f(tl, tr));
