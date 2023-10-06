@@ -9,7 +9,7 @@ struct SCC {
 	vector<vector<int>> rG;
 	vector<vector<int>> indexes;
 	vector<int> group;
-	vector<vector<int>> newG;
+	vector<vector<int>> DAG;
 	int newsize;
 	int size;
 	
@@ -65,7 +65,7 @@ struct SCC {
 	
 		newsize = cnt;
 		vector<int> nflag(cnt, -1);
-		newG = decltype(newG)(cnt);
+		DAG = decltype(DAG)(cnt);
 
 		// edge build
 		for (int nu = 0; nu < cnt; nu++) {
@@ -75,7 +75,7 @@ struct SCC {
 					if (nu == nv) continue;
 					if (nflag[nv] != nu) {
 						nflag[nv] = nu;
-						newG[nu].push_back(nv);
+						DAG[nu].push_back(nv);
 					}
 				}
 			}
@@ -84,7 +84,7 @@ struct SCC {
 };
 
 //verified https://onlinejudge.u-aizu.ac.jp/problems/GRL_3_C
-//verified https://judge.yosupo.jp/problem/scc 勝手ながら使わせてもらいました。
+//verified https://judge.yosupo.jp/problem/scc 勝手ながら使わせていただきました。
 //https://atcoder.jp/contests/abc245/tasks/abc245_f でも間接的ではあるが、辺が張られているかを一応試している。
 
 int main() {
