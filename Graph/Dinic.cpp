@@ -17,7 +17,7 @@ struct Dinic {
 	const T INF;
 	int V;
 
-	Dinic(int size) : V(size), INF(numeric_limits<T>::max()), timestamp(0) {
+	Dinic(int size) : V(size), INF(numeric_limits<T>::max()) {
 		G.resize(size);
 	}
 
@@ -70,16 +70,13 @@ struct Dinic {
 
 //Please copy above code!
 
-//verify用のソースコードはei1333さんのものを借りました
 //verified with http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=GRL_6_A
 int main() {
-	int V, E;
-	scanf("%d %d", &V, &E);
-	Dinic< int > g(V);
-	for(int i = 0; i < E; i++) {
-		int a, b, c;
-		scanf("%d %d %d", &a, &b, &c);
-		g.add_edge(a, b, c);
+	int V, E; cin >> V >> E;
+	Dinic<int> G(V);
+	for (int i = 0; i < E; i++) {
+		int u, v, c; cin >> u >> v >> c;
+		G.add_edge(u, v, c);
 	}
-	printf("%d\n", g.max_flow(0, V - 1));
+	cout << G.max_flow(0, V-1) << endl;
 }
