@@ -84,10 +84,12 @@ struct SCC {
 };
 
 //verified https://onlinejudge.u-aizu.ac.jp/problems/GRL_3_C
-//辺がちゃんと張られているかは https://atcoder.jp/contests/abc245/tasks/abc245_f 辺りで試しはした。
-//間接的な試しではあるのでちゃんと動くことを確認できたかというと気持ちできてない気がする。
+//verified https://judge.yosupo.jp/problem/scc 勝手ながら使わせてもらいました。
+//https://atcoder.jp/contests/abc245/tasks/abc245_f でも間接的ではあるが、辺が張られているかを一応試している。
 
 int main() {
+	cin.tie(0);
+	ios::sync_with_stdio(false);
 	int V, E; cin >> V >> E;
 	SCC scc(V);
 	for (int i = 0; i < E; i++) {
@@ -95,14 +97,14 @@ int main() {
 		scc.add_edge(s, t);
 	}
 	scc.build();
-	int Q; cin >> Q;
-	for (int i = 0; i < Q; i++) {
-		int u, v; cin >> u >> v;
-		if (scc.group[u] == scc.group[v]) {
-			cout << 1 << '\n';
-		} else {
-			cout << 0 << '\n';
+	cout << scc.indexes.size() << '\n';
+	for (int u = 0; u < scc.indexes.size(); u++) {
+		cout << scc.indexes[u].size() << " " << scc.indexes[u][0];
+		for (int i = 1; i < scc.indexes[u].size(); i++) {
+			cout << " " << scc.indexes[u][i];
 		}
+		cout << '\n';
 	}
+
 	return (0);
 }
