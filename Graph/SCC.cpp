@@ -85,7 +85,7 @@ struct SCC {
 
 //verified https://onlinejudge.u-aizu.ac.jp/problems/GRL_3_C
 //辺がちゃんと張られているかは https://atcoder.jp/contests/abc245/tasks/abc245_f 辺りで試しはした。
-//間接的な試しではあるのでちゃんとverifyはされてない
+//間接的な試しではあるのでちゃんと動くことを確認できたかというと気持ちできてない気がする。
 
 int main() {
 	int V, E; cin >> V >> E;
