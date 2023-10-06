@@ -16,6 +16,7 @@
 ・Dijkstra  
 ・Ford-Fulkerson  
 ・Dinic  
+・強連結成分分解(SCC)  
 ## 数学
 ・Matrix  
 ・拡張ユークリッド互除法(ちょっとまだよくわかってない)
