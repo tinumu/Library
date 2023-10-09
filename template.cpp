@@ -28,8 +28,13 @@ constexpr int dx[] = {0, 1, 0, -1, 1, 1, -1, -1};
 constexpr char el = '\n';
 constexpr int mod = 1000000007;
 constexpr int mod2 = 998244353;
-template<typename T> T gcd(T a, T b) { return (b ? gcd(b, a % b) : a); }
-template<typename T> T lcm(T a, T b) { return (a / gcd(a, b) * b); }
+
+template<typename T> T vgcd(T a, T b) { return (b ? gcd(b, a % b) : a); }
+template<typename T, typename... Ts> T vgcd(T a, Ts... args) { return (vgcd(a, vgcd(args...))); }
+
+template<typename T> T vlcm(T a, T b) { return (lcm(a, b)); }
+template<typename T, typename... Ts> T vlcm(T a, Ts... args) { return (vlcm(a, vlcm(args...))); }
+
 template<typename T1, typename T2>
 inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
