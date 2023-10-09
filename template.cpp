@@ -29,7 +29,7 @@ constexpr char el = '\n';
 constexpr int mod = 1000000007;
 constexpr int mod2 = 998244353;
 
-template<typename T> T vgcd(T a, T b) { return (b ? gcd(b, a % b) : a); }
+template<typename T> T vgcd(T a, T b) { return (gcd(a, b)); }
 template<typename T, typename... Ts> T vgcd(T a, Ts... args) { return (vgcd(a, vgcd(args...))); }
 
 template<typename T> T vlcm(T a, T b) { return (lcm(a, b)); }
