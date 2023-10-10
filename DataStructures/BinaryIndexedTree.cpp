@@ -4,13 +4,12 @@ using namespace std;
 template<typename T> 
 struct BIT {
 	vector<T> dat;
-	int midsize; //lower_boundの時の最初のアクセスポイント
+	int size; //2べきのサイズ
 
 	BIT (int n) { 
 		dat.assign(n+1, 0);
-		midsize = 1;
-		while (midsize <= n) midsize <<= 1;
-		midsize >>= 1;
+		size = 1;
+		while (size <= n) size <<= 1;
 	}
 
 	void add(int k, T x) {
@@ -31,7 +30,7 @@ struct BIT {
 	// O(log N) に修正, 実装汚いけど
 	int lower_bound(T x) {
 		T sum = 0;
-		int sz = midsize;
+		int sz = size;
 		int pos = 0;
 		T all = query((int)dat.size()-1);
 		while (sz && pos+1 < dat.size()) {
