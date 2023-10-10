@@ -1,14 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T> 
+template<typename T>
 struct BIT {
 	vector<T> dat;
+	T all;
+	int midsize; //lower_boundの時の最初のアクセスポイント
 
-	BIT (int n) { dat.assign(n+1, 0); }
+	BIT (int n) : all(0) {
+		dat.assign(n+1, 0);
+		midsize = 1;
+		while (midsize <= n) midsize <<= 1;
+		midsize >>= 1;
+	}
 
 	void add(int k, T x) {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
+		all += x;
 	}
 
 	T query(int k) {
@@ -22,15 +30,24 @@ struct BIT {
 		return (query(r) - (l > 0 ? query(l-1) : 0));
 	}
 
+	// O(log N) に修正, 実装汚いけど
 	int lower_bound(T x) {
-		int l, r;
-		l = -1, r = dat.size();
-		while (l + 1 < r) {
-			int m = (l + r) / 2;
-			if (query(m) >= x) r = m;
-			else l = m;
+		T sum = 0;
+		int sz = midsize;
+		int pos = 0;
+		while (sz && pos+1 < dat.size()) {
+			T val;
+			int next;
+			if ((pos|sz) >= dat.size()) val = all, next = (int)dat.size()-1;
+			else val = sum + dat[pos|sz], next = pos|sz;
+
+			if (val < x) {
+				sum = val;
+				pos = next;
+			}
+			sz >>= 1;
 		}
-		return (r);
+		return (pos);
 	}
 };
 
@@ -48,13 +65,9 @@ long long invNum(vector<int> &perm) {
 
 
 
-
-
-
-
 //たしかめ
 
 int main() {
-	vector<int> data = {2, 0, 1, 3};
+	vector<int> data = {3, 2, 1, 0};
 	cout << invNum(data) << endl;
 }
