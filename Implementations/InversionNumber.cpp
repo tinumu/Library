@@ -15,7 +15,6 @@ struct BIT {
 
 	void add(int k, T x) {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
-		all += x;
 	}
 
 	T query(int k) {
