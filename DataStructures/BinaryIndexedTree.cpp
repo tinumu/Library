@@ -52,11 +52,11 @@ struct BIT {
 };
 
 int main() {
-	BIT<int> bit(127);
-	for (int i = 0; i < 127; i++) bit.add(i, i);
+	BIT<int> bit(128);
+	for (int i = 0; i < 128; i++) bit.add(i, i);
 	
 	int val; cin >> val;
-	cout << bit.query(126) << endl;
+	cout << bit.query(127) << endl;
 	cout << bit.lower_bound(val) << endl;
 
 	return (0);
