@@ -4,10 +4,9 @@ using namespace std;
 template<typename T> 
 struct BIT {
 	vector<T> dat;
-	T all;
 	int midsize; //lower_boundの時の最初のアクセスポイント
 
-	BIT (int n) : all(0) { 
+	BIT (int n) { 
 		dat.assign(n+1, 0);
 		midsize = 1;
 		while (midsize <= n) midsize <<= 1;
@@ -16,7 +15,6 @@ struct BIT {
 
 	void add(int k, T x) {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
-		all += x;
 	}
 
 	T query(int k) {
@@ -35,6 +33,7 @@ struct BIT {
 		T sum = 0;
 		int sz = midsize;
 		int pos = 0;
+		T all = query((int)dat.size()-1);
 		while (sz && pos+1 < dat.size()) {
 			T val;
 			int next;
