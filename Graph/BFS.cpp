@@ -12,6 +12,7 @@ struct Edge {
 	Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
 };
 
+//オーバーフローに気をつける
 template<typename T>
 vector<T> BFS(int V, const vector<vector<Edge<T>>> &G, int s) {
 	using Node = pair<T, int>;
