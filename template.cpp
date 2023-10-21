@@ -35,10 +35,15 @@ template<typename T, typename... Ts> T vgcd(T a, Ts... args) { return (vgcd(a, v
 template<typename T> T vlcm(T a, T b) { return (lcm(a, b)); }
 template<typename T, typename... Ts> T vlcm(T a, Ts... args) { return (vlcm(a, vlcm(args...))); }
 
+template<typename T1, typename T2> inline void chgcd(T1 &a, T2 b) { a = gcd(a, b); }
+template<typename T1, typename T2> inline void chlcm(T1 &a, T2 b) { a = lcm(a, b); }
+
 template<typename T1, typename T2>
 inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
+
+template<typename T> T sqpow(T x) { return (x*x); }
 
 template<typename T>
 vector<T> makeVector(size_t a, T b) { return (vector<T>(a, b)); }
