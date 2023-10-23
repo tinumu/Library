@@ -10,7 +10,7 @@ struct Edge {
 	Edge (int to, T cost) : from(-1), to(to), cost(cost) {}
 };
 
-	template<typename T>
+template<typename T>
 vector<T> BellmanFord(int V, vector<Edge<T>> &edges, int s)
 {
 	constexpr T INF = numeric_limits<T>::max();
