@@ -17,6 +17,7 @@
 ・Ford-Fulkerson  
 ・Dinic  
 ・強連結成分分解(SCC)  
+・LowLink (成分分解はしない)
 ## 数学
 ・Matrix  
 ・拡張ユークリッド互除法(ちょっとまだよくわかってない)
