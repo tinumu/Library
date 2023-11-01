@@ -32,7 +32,7 @@ struct BIT {
 		T sum = 0;
 		int sz = size;
 		int pos = 0;
-		T all = query((int)dat.size()-1);
+		T all = query((int)dat.size()-2);
 		while (sz && pos+1 < dat.size()) {
 			T val;
 			int next;
