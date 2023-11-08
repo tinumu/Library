@@ -49,20 +49,17 @@ struct BIT {
 	}
 };
 
-
 //0-indexed
-long long invNum(vector<int> &perm) {
+long long invNum(vector<int> &values) {
 	long long ans = 0;
-	int n = perm.size();
-	BIT<int> tree(n);
+	int n = values.size();
+	BIT<int> tree(*max_element(begin(values), end(values)) + 1);
 	for (int j = 0; j < n; j++) {
-		ans += j-tree.query(perm[j]);
-		tree.add(perm[j], 1);
+		ans += j-tree.query(values[j]);
+		tree.add(values[j], 1);
 	}
 	return (ans);
 }
-
-
 
 //たしかめ
 
