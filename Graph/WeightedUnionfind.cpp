@@ -4,20 +4,20 @@ using namespace std;
 //Please copy under code.
 
 template<typename T>
-struct PotentialUnionfind {
+struct WeightedUnionfind {
 	vector<int> data;
-	vector<T> pot;
+	vector<T> weight;
 
-	PotentialUnionfind() {}
-	PotentialUnionfind(int n, T id = 0) {
+	WeightedUnionfind() {}
+	WeightedUnionfind(int n, T id = 0) {
 		data.assign(n, -1);
-		pot.assign(n, id);
+		weight.assign(n, id);
 	}
 
 	int root(int n) {
 		if (data[n] < 0) return (n);
 		int r = root(data[n]);
-		pot[n] += pot[data[n]];
+		weight[n] += weight[data[n]];
 		return (data[n] = r);
 	}
 
@@ -25,20 +25,20 @@ struct PotentialUnionfind {
 	bool same(int x, int y) { return (root(x) == root(y)); }
 
 	//同じ連結成分に含まれているときに使う
-	//x -> y の差分を取る p_y-p_x
-	T diff(int x, int y) { return (pot[y] - pot[x]); }
+	//x -> y の差分を取る w_y-w_x
+	T diff(int x, int y) { return (weight[y] - weight[x]); }
 	
-	//x -> y に p を追加
-	void unite(int x, int y, T p) {
+	//x -> y に w を追加
+	void unite(int x, int y, T w) {
 		int rx = root(x), ry = root(y);
 		if (rx == ry) return;
 
 		if (data[rx] > data[ry]) {
 			swap(rx, ry);
 			swap(x, y);
-			p = -p;
+			w = -w;
 		}
-		pot[ry] = p - (pot[y] - pot[x]);
+		weight[ry] = w - (weight[y] - weight[x]);
 		data[rx] += data[ry];
 		data[ry] = rx;
 	}
