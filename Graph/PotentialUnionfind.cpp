@@ -6,19 +6,19 @@ using namespace std;
 template<typename T>
 struct PotentialUnionfind {
 	vector<int> data;
-	vector<T> weight;
+	vector<T> pot;
 	T ident;	
 
 	PotentialUnionfind() {}
 	PotentialUnionfind(int n, T id = 0) : ident(id) {
 		data.assign(n, -1);
-		weight.assign(n, id);
+		pot.assign(n, id);
 	}
 
 	int root(int n) {
 		if (data[n] < 0) return (n);
 		int r = root(data[n]);
-		weight[n] += weight[data[n]];
+		pot[n] += pot[data[n]];
 		return (data[n] = r);
 	}
 
@@ -26,8 +26,8 @@ struct PotentialUnionfind {
 	bool same(int x, int y) { return (root(x) == root(y)); }
 
 	//同じ連結成分に含まれているときに使う
-	//x -> y の差分を取る w_y-w_x
-	T diff(int x, int y) { return (weight[y] - weight[x]); }
+	//x -> y の差分を取る p_y-p_x
+	T diff(int x, int y) { return (pot[y] - pot[x]); }
 	
 	//x -> y に w を追加
 	void unite(int x, int y, T w) {
@@ -39,7 +39,7 @@ struct PotentialUnionfind {
 			swap(x, y);
 			w = -w;
 		}
-		weight[ry] = w - (weight[y] - weight[x]);
+		pot[ry] = w - (pot[y] - pot[x]);
 		data[rx] += data[ry];
 		data[ry] = rx;
 	}
