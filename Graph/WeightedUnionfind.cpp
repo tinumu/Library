@@ -48,7 +48,7 @@ struct WeightedUnionfind {
 int main() {
 	using ll = long long;
 	int N, Q; cin >> N >> Q;
-	PotentialUnionfind<ll> tree(N);
+	WeightedUnionfind<ll> tree(N);
 	while (Q--) {
 		int t; cin >> t;
 		if (t == 0) {
