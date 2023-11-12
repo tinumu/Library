@@ -12,6 +12,7 @@
 ・BinaryIndexedTree  
 ## グラフ
 ・Unionfind  
+・Unionfind(ポテンシャル付き)  
 ・Bellman-Ford  
 ・Dijkstra  
 ・Ford-Fulkerson  
