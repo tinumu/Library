@@ -7,10 +7,9 @@ template<typename T>
 struct PotentialUnionfind {
 	vector<int> data;
 	vector<T> pot;
-	T ident;	
 
 	PotentialUnionfind() {}
-	PotentialUnionfind(int n, T id = 0) : ident(id) {
+	PotentialUnionfind(int n, T id = 0) {
 		data.assign(n, -1);
 		pot.assign(n, id);
 	}
@@ -29,17 +28,17 @@ struct PotentialUnionfind {
 	//x -> y の差分を取る p_y-p_x
 	T diff(int x, int y) { return (pot[y] - pot[x]); }
 	
-	//x -> y に w を追加
-	void unite(int x, int y, T w) {
+	//x -> y に p を追加
+	void unite(int x, int y, T p) {
 		int rx = root(x), ry = root(y);
 		if (rx == ry) return;
 
 		if (data[rx] > data[ry]) {
 			swap(rx, ry);
 			swap(x, y);
-			w = -w;
+			p = -p;
 		}
-		pot[ry] = w - (pot[y] - pot[x]);
+		pot[ry] = p - (pot[y] - pot[x]);
 		data[rx] += data[ry];
 		data[ry] = rx;
 	}
