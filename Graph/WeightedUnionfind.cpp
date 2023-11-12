@@ -23,10 +23,11 @@ struct WeightedUnionfind {
 
 	int size(int n) { return (-data[root(n)]); };
 	bool same(int x, int y) { return (root(x) == root(y)); }
+	T getWeight(int x) { root(x); return (weight[x]); }
 
 	//同じ連結成分に含まれているときに使う
 	//x -> y の差分を取る w_y-w_x
-	T diff(int x, int y) { return (weight[y] - weight[x]); }
+	T diff(int x, int y) { return (getWeight(y) - getWeight(x)); }
 	
 	//x -> y に w を追加
 	void unite(int x, int y, T w) {
