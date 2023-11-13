@@ -34,7 +34,7 @@ struct ChromaticNumber {
 			ll G_k = 0;
 			for (int S = 0; S < (1<<size); S++) {
 				(F[S] *= I[S]) %= m;
-				(G_k += m + F[S]) %= m;
+				(G_k += F[S]) %= m;
 			}
 			if (G_k != 0) {
 				return (k);
