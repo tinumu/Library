@@ -10,7 +10,7 @@ struct ChromaticNumber {
 	int chromatic_number;
 	vector<int> G;
 
-	ChromaticNumber(vector<int> G) : size(G.size()), G(G) {
+	ChromaticNumber(vector<int> &G) : size(G.size()), G(G) {
 		init();
 		chromatic_number = calcChromaticNumber();
 	};
