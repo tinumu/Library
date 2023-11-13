@@ -6,6 +6,7 @@ using namespace std;
 struct Unionfind {
 	vector<int> data;
 	
+	Unionfind() {}
 	Unionfind(int n) { data.assign(n, -1); }
 
 	int root(int n) {

@@ -7,7 +7,8 @@ template<typename T>
 struct WeightedUnionfind {
 	vector<int> data;
 	vector<T> weight;
-
+	
+	WeightedUnionfind() {}
 	WeightedUnionfind(int n, T id = 0) {
 		data.assign(n, -1);
 		weight.assign(n, id);
