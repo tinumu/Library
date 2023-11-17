@@ -23,6 +23,7 @@ template<typename T> using minHeap = priority_queue<T, vector<T>, greater<T>>;
 
 constexpr int INF = (1 << 30) - 1;
 constexpr ll LLINF = 4e18;
+constexpr double DINF = 1e300;
 constexpr int dy[] = {1, 0, -1, 0, 1, -1, -1, 1};
 constexpr int dx[] = {0, 1, 0, -1, 1, 1, -1, -1};
 constexpr char el = '\n';
