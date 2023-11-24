@@ -101,7 +101,7 @@ struct RootedTree {
 		Edge_t uw = 0;
 		for (int b = bsize-1; b >= 0; b--) {
 			if (parent[ku][b].to == -1) continue;
-			if (parent[ku][b].weight + uw <= dist) {
+			if (op(parent[ku][b].weight, uw) <= dist) {
 				uw = op(uw, parent[ku][b].weight);
 				ku = parent[ku][b].to;
 			}
