@@ -94,15 +94,15 @@ struct RootedTree {
 		}
 		return (make_pair(u, ret));
 	}
-
-	//モノイドには使えない
+	
+	//数字が大きくなる系は使える (max, 正の重みの和)
 	pair<int, Edge_t> getAncestorDist(int u, Edge_t dist) {
 		int ku = u;
 		Edge_t uw = 0;
 		for (int b = bsize-1; b >= 0; b--) {
 			if (parent[ku][b].to == -1) continue;
 			if (parent[ku][b].weight + uw <= dist) {
-				uw += parent[ku][b].weight;
+				uw = op(uw, parent[ku][b].weight);
 				ku = parent[ku][b].to;
 			}
 		}
