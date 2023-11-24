@@ -46,6 +46,15 @@ struct RootedTree {
 		doubling();
 	}
 
+	//k 個前の祖先のクエリ
+	int getAncestor(int u, int k) {
+		k = min(k, depth[u]);
+		for (int b = 0; b < bsize; b++) {
+			if ((k>>b)&1) u = parent[u][b];
+		}
+		return (u);
+	}
+
 	int lca(int su, int sv) {
 		if (depth[su] > depth[sv]) swap(su, sv);
 		int sa = depth[sv] - depth[su];

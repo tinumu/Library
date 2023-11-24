@@ -15,7 +15,7 @@ struct RootedTree {
 	};
 
 	int size, bsize;
-	vector<vector<Edge>> G;	
+	vector<vector<Edge>> G;
 	vector<vector<Edge>> parent;
 	vector<int> depth;
 	function<Edge_t(Edge_t, Edge_t)> op;
@@ -28,12 +28,12 @@ struct RootedTree {
 		while ((1<<bsize) < N) bsize++;
 		parent = decltype(parent)(N, vector<Edge>(bsize));
 	}
-	
+
 	void add_edge(int from, int to, Edge_t weight) {
 		G[from].emplace_back(to, weight);
 		G[to].emplace_back(from, weight);
 	}
-	
+
 	void makeDepthAndParent(int u, int p, Edge_t weight, int d) {
 		depth[u] = d;
 		parent[u][0] = Edge(p, weight);
@@ -71,7 +71,7 @@ struct RootedTree {
 			if ((sa>>b)&1) v = parent[v][b].to;
 		}
 		if (u == v) return (u);
-	
+
 		for (int b = bsize-1; b >= 0; b--) {
 			if (parent[u][b].to != parent[v][b].to) {
 				u = parent[u][b].to;
@@ -80,6 +80,33 @@ struct RootedTree {
 		}
 
 		return (parent[u][0].to);
+	}
+
+	//k 個前の祖先のクエリ
+	pair<int, Edge_t> getAncestor(int u, int k) {
+		Edge_t ret = id;
+		k = min(k, depth[u]);
+		for (int b = 0; b < bsize; b++) {
+			if ((k>>b)&1) {
+				ret = op(ret, parent[u][b].weight);
+				u = parent[u][b].to;
+			}
+		}
+		return (make_pair(u, ret));
+	}
+
+	//モノイドには使えない
+	pair<int, Edge_t> getAncestorDist(int u, Edge_t dist) {
+		int ku = u;
+		Edge_t uw = 0;
+		for (int b = bsize-1; b >= 0; b--) {
+			if (parent[ku][b].to == -1) continue;
+			if (parent[ku][b].weight + uw <= dist) {
+				uw += parent[ku][b].weight;
+				ku = parent[ku][b].to;
+			}
+		}
+		return (make_pair(ku, uw));
 	}
 
 	Edge_t query(int u, int v) {
@@ -102,6 +129,7 @@ struct RootedTree {
 		return (ret);
 	}
 };
+
 
 //ここまで======================================================================
 
