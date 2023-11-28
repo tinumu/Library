@@ -47,14 +47,15 @@ struct Modint {
 	constexpr Modint operator / (const Modint &v) const { return ((*this) * ~v); }
 	constexpr Modint &operator /= (const Modint &v) { return ((*this) = (*this) / v); }
 
-	constexpr Modint operator ^ (u64 n) const {
+	constexpr Modint operator ^ (i64 n) const {
 		Modint<MOD> ret(1), mul(dat);
-		while (n > 0) {
-			if (n & 1) ret *= mul;
+		u64 m = n < 0 ? -n : n;
+		while (m > 0) {
+			if (m & 1) ret *= mul;
 			mul *= mul;
-			n >>= 1;
+			m >>= 1;
 		}
-		return (ret);
+		return (n < 0 ? ~ret : ret);
 	}
 
 	bool operator == (const Modint &v) { return (dat == v.dat); }
@@ -75,3 +76,11 @@ struct Modint {
 	u64 dat;
 };
 
+int main() {
+	using Mint = Modint<998244353>;
+	Mint a = Mint(2)^(-10);
+
+	Mint b = a * (Mint(2)^(10));
+
+	cout << a << " " << b << endl;
+}
