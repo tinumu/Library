@@ -98,6 +98,10 @@ struct Circle {
 		double a = acos((r*r + d*d - c.r*c.r) / (2*r*d));
 		return ((vector<V2>){o + polar(r, t+a), o + polar(r, t-a)});
 	}
+
+	double dist(const Circle &c) {
+		return (intersects(c) == 0 ? (o-c.o).norm() - r - c.r : .0);
+	}
 };
 
 //多角形は半時計回りに与えられるものとする
