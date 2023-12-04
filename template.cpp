@@ -91,8 +91,8 @@ void Main() {
 }
 
 int main() {
-	cin.tie(0);
-	ios::sync_with_stdio(0);
+	cin.tie(nullptr);
+	ios::sync_with_stdio(false);
 	cout << fixed << setprecision(20);
 	Main();
 	return (0);
