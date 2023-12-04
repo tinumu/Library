@@ -35,6 +35,17 @@ struct V2 {
 	double dot(const V2 &p) const { return (x*p.x + y*p.y); }
 	double cross(const V2 &p) const { return (x*p.y - y*p.x); }
 	double arg() const { return (atan2(y, x)); }
+
+	friend ostream& operator << (ostream &os, const V2 &v) {
+		return (os << v.x << " " << v.y);
+	}
+
+	friend istream& operator >> (istream &is, V2 &v) {
+		double x, y;
+		is >> x >> y;
+		v = V2(x, y);
+		return (is);
+	}
 };
 
 V2 polar(double r, double a) { return (V2(cos(a) * r, sin(a) * r)); }
