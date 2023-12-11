@@ -50,3 +50,17 @@ int main()
 		
 	return (0);
 }
+
+//クエリリスト
+template<typename Data_t>
+struct SumMax {
+	using T = pair<Data_t, Data_t>;
+
+	function<T(T, T)> op;
+	T id;
+	SumMaxQuery() {
+		op = [](T a, T b) { return (T(max(a.first, b.first+a.second), a.second + b.second)); };
+		id = T(0, 0);
+	}
+};
+
