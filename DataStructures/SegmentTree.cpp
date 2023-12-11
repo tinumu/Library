@@ -53,7 +53,7 @@ int main()
 
 //クエリリスト
 template<typename Data_t>
-struct SumMax {
+struct SumMaxQuery {
 	using T = pair<Data_t, Data_t>;
 
 	function<T(T, T)> op;
