@@ -43,6 +43,11 @@ struct DualSegmentTree {
 		thrust(k + size);
 		return (g(dat, laz[k+size]));
 	}
+
+	E get(int k) {
+		thrust(k + size);
+		return (laz[k+size]);
+	}
 };
 
 //verified https://judge.yosupo.jp/problem/range_affine_point_get
@@ -78,7 +83,7 @@ int main() {
 			seg.update(l, r, Query(b, c));
 		} else {
 			int i; cin >> i;
-			cout << seg.get<ll>(i, A[i], G) << '\n';
+			cout << G(A[i], seg.get(i)) << '\n';
 		}
 	}
 }
