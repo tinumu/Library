@@ -131,3 +131,20 @@ struct RangeAffineRangeSum {
 	}
 };
 
+template<typename T>
+struct RangeAddRangeMax {
+	using E = T;
+	function<T(T, T)> f;
+	function<T(T, E)> g;
+	function<E(E, E)> h;
+	T ti;
+	E ei;
+	RangeAddRangeMax() {
+		f = [](T a, T b) { return (max(a, b)); };
+		g = [](T a, E b) { return (a+b); };
+		h = [](E a, E b) { return (a+b); };
+		ti = numeric_limits<T>::min();
+		ei = 0;
+	}
+};
+
