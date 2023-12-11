@@ -131,6 +131,7 @@ struct RangeAffineRangeSum {
 	}
 };
 
+//区間加算, 区間のmax を求める
 template<typename T>
 struct RangeAddRangeMax {
 	using E = T;
