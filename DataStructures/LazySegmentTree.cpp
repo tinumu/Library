@@ -106,3 +106,26 @@ int main() {
 }
 
 //verified https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_H
+
+//クエリリスト
+//型を置くのが面倒くさいけど、セグ木の中身を変えるのが面倒なので関数と単位元だけ提供することにする
+
+//アフィン変換 a <- ba + c, T に a をいれる E に b, c を入れる
+template<typename T>
+struct RangeAffineRangeSum {
+	using E = pair<T, T>;
+
+	T ti;
+	E ei;
+	function<T(T, T)> f;
+	function<T(T, E)> g;
+	function<E(E, E)> h;
+	RangeAffineRangeSum() {
+		ti = 0;
+		ei = E(1, 0);
+		f = [](T a, T b) { return (a+b); };
+		g = [](T a, E b) { return (a*b.first + b.second); };
+		h = [](E a, E b) { return (E(b.first*a.first, b.first*a.second + b.second)); };
+	}
+};
+
