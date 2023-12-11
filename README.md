@@ -8,6 +8,7 @@
 
 ## データ構造
 ・SegmentTree(非再帰)  
+・双対SegmentTree(非再帰)  
 ・遅延SegmentTree(非再帰)  
 ・BinaryIndexedTree  
 ## グラフ
