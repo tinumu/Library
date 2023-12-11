@@ -81,6 +81,7 @@ struct LazySegmentTree {
 	}
 };
 
+//verified https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_H
 int main() {
 	int N, Q;
 	
@@ -105,12 +106,13 @@ int main() {
 	return (0);
 }
 
-//verified https://onlinejudge.u-aizu.ac.jp/courses/library/3/DSL/all/DSL_2_H
 
 //クエリリスト
-//型を置くのが面倒くさいけど、セグ木の中身を変えるのが面倒なので関数と単位元だけ提供することにする
+//関数と単位元だけ提供することにする
+//セグ木に乗せるときは面倒だけど型とかちゃんと書かないといけない
 
-//アフィン変換 a <- ba + c, T に a をいれる E に b, c を入れる
+//アフィン変換 a <- ba + c にするやつ
+//T に a をいれる E に b, c を入れる
 template<typename T>
 struct RangeAffineRangeSum {
 	using E = pair<T, T>;
