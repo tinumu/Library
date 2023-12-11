@@ -58,8 +58,8 @@ struct Modint {
 		return (n < 0 ? ~ret : ret);
 	}
 
-	bool operator == (const Modint &v) { return (dat == v.dat); }
-	bool operator != (const Modint &v) { return (dat != v.dat); }
+	const bool operator == (const Modint &v) const { return (dat == v.dat); }
+	const bool operator != (const Modint &v) const { return (dat != v.dat); }
 
 	friend ostream& operator << (ostream &os, const Modint &p) {
 		return (os << p.dat);
