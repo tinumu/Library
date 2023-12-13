@@ -29,27 +29,27 @@ struct SCC {
 		vector<int> number;
 		vector<bool> flag(size, false);
 
-		function<void(int)> numbering = [&](int u) {
+		auto numbering = [&](auto &&numbering, int u) -> void {
 			if (flag[u]) return;
 			flag[u] = true;
 			for (auto &v : G[u]) {
-				numbering(v);
+				numbering(numbering, v);
 			}
 			number.push_back(u);
 		};
 
-		function<void(int, int)> nodeBuild = [&](int u, int nu) {
+		auto nodeBuild = [&](auto &&nodeBuild, int u, int nu) -> void {
 			if (flag[u]) return;
 			flag[u] = true;
 			group[u] = nu;
 			indexes[nu].push_back(u);
 			for (auto &v : rG[u]) {
-				nodeBuild(v, nu);
+				nodeBuild(nodeBuild, v, nu);
 			}
 		};
 
 		for (int u = 0; u < size; u++) {
-			numbering(u);
+			numbering(numbering, u);
 		}
 		reverse(begin(number), end(number));
 
@@ -58,7 +58,7 @@ struct SCC {
 		for (auto &u : number) {
 			if (!flag[u]) {
 				indexes.push_back(vector<int>());
-				nodeBuild(u, cnt);
+				nodeBuild(nodeBuild, u, cnt);
 				cnt++;
 			}
 		}
