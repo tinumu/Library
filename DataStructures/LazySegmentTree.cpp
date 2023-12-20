@@ -76,17 +76,17 @@ struct LazySegmentTree {
 };
 
 //区間の長さは取らないといけないかな？
-template<typename T>
+template<typename TT>
 struct RangeAffineRangeSum {
-	using TT = pair<T, int>;
+	using T = pair<TT, int>;
 	using E = pair<T, T>;
 	using valueTypeE = E;
-	using valueTypeT = TT;
+	using valueTypeT = T;
 
-	static inline TT ti = TT(0, 0);
+	static inline T ti = T(0, 0);
 	static inline E ei = E(1, 0);
-	static TT f(TT a, TT b) { return (TT(a.first+b.first, a.second+b.second)); }
-	static TT g(TT a, E b) { return (TT(a.first*b.first + b.second*a.second, a.second)); };
+	static T f(T a, T b) { return (T(a.first+b.first, a.second+b.second)); }
+	static T g(T a, E b) { return (T(a.first*b.first + b.second*a.second, a.second)); };
 	static E h(E a, E b) { return (E(b.first*a.first, b.first*a.second + b.second)); };
 };
 
