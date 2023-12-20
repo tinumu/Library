@@ -79,7 +79,7 @@ struct LazySegmentTree {
 template<typename TT>
 struct RangeAffineRangeSum {
 	using T = pair<TT, int>;
-	using E = pair<T, T>;
+	using E = pair<TT, TT>;
 	using valueTypeE = E;
 	using valueTypeT = T;
 
