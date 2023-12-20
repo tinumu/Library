@@ -1,66 +1,116 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int INF = numeric_limits<int>::max();
-
-template<typename T>
+template<typename Monoid>
 struct SegmentTree {
-	
-	T id;
-	function<T(T, T)> op;
+	using T = typename Monoid::valueType;
 	vector<T> dat;
 	int size;
 
-	SegmentTree(int n, T id, function<T(T, T)> op) : id(id), op(op) {
+	SegmentTree(int n) {
 		size = 1;
 		while (size < n) size <<= 1;
-		dat.assign(size * 2 + 10, id);
+		dat.assign(size * 2, Monoid::id);
 	}
 
 	void update(int k, T x) {
 		k += size, dat[k] = x;
-		while (k > 1) k >>= 1, dat[k] = op(dat[k << 1], dat[(k << 1) | 1]);
+		while (k > 1) k >>= 1, dat[k] = Monoid::op(dat[k<<1], dat[(k<<1) | 1]);
+	}
+	
+	void calc_all() {
+		for (int k = size-1; k > 0; k--) {
+			dat[k] = Monoid::op(dat[k<<1], dat[(k<<1) | 1]);
+		}
 	}
 
-	void merge(int k, T x) { update(k, op(x, dat[k + size])); }
+	void updateall(T x) {
+		for (int k = size; k < (size<<1); k++) {
+			dat[k] = x;
+		}
+		calc_all();
+	}
+
+	void updateall(const vector<T> &val) {
+		for (int k = 0; k < val.size(); k++) {
+			dat[k+size] = val[k];
+		}
+		calc_all();
+	}
+
+	void merge(int k, T x) { update(k, Monoid::op(x, dat[k + size])); }
 	//[a, b)
 	T query(int a, int b) {
-		T tl = id, tr = id;
+		T tl = Monoid::id, tr = Monoid::id;
 		for (int l = a + size, r = b + size; l < r; l >>= 1, r >>= 1) {
-			if (l & 1) tl = op(tl, dat[l++]);
-			if (r & 1) tr = op(dat[--r], tr);
+			if (l & 1) tl = Monoid::op(tl, dat[l++]);
+			if (r & 1) tr = Monoid::op(dat[--r], tr);
 		}
-		return (op(tl, tr));
+		return (Monoid::op(tl, tr));
 	}
 };
 
+//クエリリスト
+
+template<typename T>
+struct RmQ {
+	using valueType = T;
+	static T op(T a, T b) { return (min(a, b)); }
+	static inline T id = numeric_limits<T>::max();
+};
+
+template<typename T>
+struct RMQ {
+	using valueType = T;
+	static T op(T a, T b) { return (max(a, b)); }
+	static inline T id = numeric_limits<T>::min();
+};
+
+template<typename T>
+struct RAQ {
+	using valueType = T;
+	static T op(T a, T b) { return (a+b); }
+	static inline T id = 0;
+};	
+
+template<typename Data_t>
+struct SumMaxQuery {
+	using valueType = pair<Data_t, Data_t>;
+	static valueType op(valueType a, valueType b) {
+		if (a == id) return (b);
+		if (b == id) return (a);
+		return (valueType(max(a.first, b.first+a.second), a.second + b.second));
+	}
+	static inline valueType id = valueType(-numeric_limits<Data_t>::max(), 0);
+};
+
+template<typename Data_t>
+struct SumMinQuery {
+	using valueType = pair<Data_t, Data_t>;
+	static valueType op(valueType a, valueType b) {
+		if (a == id) return (b);
+		if (b == id) return (a);
+		return (valueType(min(a.first, b.first+a.second), a.second + b.second));
+	}
+	static inline valueType id = valueType(numeric_limits<Data_t>::max(), 0);
+};
+
+
 int main()
 {
+	cin.tie(nullptr);
+	ios::sync_with_stdio(false);
 	int N, Q;
 	cin >> N >> Q;
-	//RMQ
-	SegmentTree<int> seg(N, INF, [](int a, int b) { return (min(a, b)); } );
+	//RmQ
+	SegmentTree<RmQ<int>> seg(N);
 
 	while (Q--) {
 		int com, a, b;
 		cin >> com >> a >> b;
 		if (com == 0) seg.update(a, b);
-		else cout << seg.query(a, b + 1) << endl;
+		else cout << seg.query(a, b + 1) << '\n';
 	}
 		
 	return (0);
 }
-
-//クエリリスト
-template<typename Data_t>
-struct SumMaxQuery {
-	using T = pair<Data_t, Data_t>;
-
-	function<T(T, T)> op;
-	T id;
-	SumMaxQuery() {
-		op = [](T a, T b) { return (T(max(a.first, b.first+a.second), a.second + b.second)); };
-		id = T(0, 0);
-	}
-};
-

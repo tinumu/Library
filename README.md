@@ -11,6 +11,7 @@
 ・双対SegmentTree(非再帰)  
 ・遅延SegmentTree(非再帰)  
 ・BinaryIndexedTree  
+・Sparse Table  
 ## グラフ
 ・Unionfind  
 ・重み付き Unionfind  
@@ -47,3 +48,4 @@
 ・全方位木DP   
 ・根付き木(ダブリング・LCAによる u, v 区間のクエリ)  
 ・木の直径(パス)
+・オイラーツアー  

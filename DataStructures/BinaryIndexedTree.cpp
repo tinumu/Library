@@ -1,12 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename T> 
+template<typename T>
 struct BIT {
 	vector<T> dat;
 	int size; //2べきのサイズ
 
-	BIT (int n) { 
+	BIT (int n) {
 		dat.assign(n+1, 0);
 		size = 1;
 		while (size <= n) size <<= 1;
@@ -15,19 +15,19 @@ struct BIT {
 	void add(int k, T x) {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
 	}
+	void update(int k, T x) { add(k, x - fold(k, k)); }
 
 	T query(int k) {
 		T sum = 0;
 		for (++k; k > 0; k -= k & -k) sum += dat[k];
 		return (sum);
 	}
-	
+
 	//[l, r]
 	T fold(int l, int r) {
 		return (query(r) - (l > 0 ? query(l-1) : 0));
 	}
-	
-	// O(log N) に修正, 実装汚いけど
+
 	int lower_bound(T x) {
 		T sum = 0;
 		int sz = size;
@@ -48,6 +48,7 @@ struct BIT {
 		return (pos);
 	}
 };
+
 
 int main() {
 	BIT<int> bit(128);
