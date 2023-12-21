@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 template <typename M>
 struct DualSegmentTree {
 	using E = typename M::valueTypeE;
+	using T = typename M::valueTypeT;
 
 	vector < E > laz;
 
@@ -36,9 +36,9 @@ struct DualSegmentTree {
 			l >>= 1, r >>= 1;
 		}
 	}
+	
 
-	template<typename T>
-	T get(int k, const T &dat, const function<T(T, E)> &g) {
+	T get(int k, const T &dat) {
 		thrust(k + size);
 		return (M::g(dat, laz[k+size]));
 	}
@@ -54,10 +54,11 @@ template<typename T>
 struct RangeAffinePointGet {
 	using E = pair<T, T>;
 	using valueTypeE = E;
+	using valueTypeT = T;
 
 	static inline E ei = E(1, 0);
 	static E h(E a, E b) { return (E(b.first*a.first, b.first*a.second + b.second)); };
-	static T g(T a, E b) { return (a*b.first + b.second); }; //双対セグ木では使わないが
+	static T g(T a, E b) { return (a*b.first + b.second); }; 
 };
 
 //verified https://judge.yosupo.jp/problem/range_affine_point_get
@@ -78,7 +79,7 @@ int main() {
 			seg.update(l, r, make_pair(b, c));
 		} else {
 			int i; cin >> i;
-			cout << RangeAffinePointGet<Mint>::g(A[i], seg.get(i)) << '\n';
+			cout << seg.get(i, A[i]) << '\n';
 		}
 	}
 }
