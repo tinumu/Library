@@ -44,7 +44,9 @@ inline bool chmin(T1 &a, T2 b) { return (a > b && (a = b, true)); }
 template<typename T1, typename T2>
 inline bool chmax(T1 &a, T2 b) { return (a < b && (a = b, true)); }
 
-template<typename T> T sqpow(T x) { return (x*x); }
+template<typename T> inline T sqpow(T x) { return (x*x); }
+template<typename T1, typename T2> inline T1 bdiv(T1 v, T2 m) { return (v < 0 ? (v-m+1)/m : v/m); }
+template<typename T1, typename T2> inline T1 bmod(T1 v, T2 m) { return ((m + v%m) % m); }
 
 template<typename T>
 vector<T> makeVector(size_t a, T b) { return (vector<T>(a, b)); }
