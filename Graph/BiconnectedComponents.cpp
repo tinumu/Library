@@ -94,7 +94,7 @@ struct BiconnectedComponents {
 				if (llink.ord[u] > llink.low[v]) continue;
 				components.push_back({});
 				while (true) {
-					auto &[a, b] = tmp.back();
+					auto [a, b] = tmp.back();
 					components.back().emplace_back(a);
 					components.back().emplace_back(b);
 					groups[a].push_back(groupsize);
