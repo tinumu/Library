@@ -21,7 +21,9 @@
 ・Ford-Fulkerson  
 ・Dinic  
 ・強連結成分分解(SCC)  
-・LowLink (成分分解はしない)  
+・LowLink  
+・二重辺連結成分分解  
+・二重頂点連結成分分解  
 ・彩色数(完全には理解してない)  
 ## 数学
 ・Matrix  
