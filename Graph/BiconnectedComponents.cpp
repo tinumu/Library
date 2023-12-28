@@ -49,38 +49,64 @@ struct LowLink {
 	}
 };
 
-// https://judge.yosupo.jp/problem/two_edge_connected_components
-
-struct TwoEdgeConnectedComponents {
+struct BiconnectedComponents {
 	using Graph = vector<vector<int>>;
 	LowLink llink;
 	vector<vector<int>> components;
-	vector<int> group;
+	vector<vector<int>> groups;
 	vector<int> used;
-	TwoEdgeConnectedComponents(const Graph &G) : llink(G), used(G.size()), group(G.size()) {
-		int c = 0;
+	vector<pair<int, int>> tmp;
+	int groupsize;
+
+	BiconnectedComponents(const Graph &G) : llink(G), groups(G.size()), used(G.size()) {
+		groupsize = 0;
 		for (int i = 0; i < G.size(); i++) {
 			if (!used[i]) {
-				components.push_back({});
-				dfs(i, -1, c);
-				c++;
+				if (G[i].size() == 0) {
+					components.push_back({i});
+					groups[i].push_back(groupsize);
+					groupsize++;
+					used[i] = true;
+				} else {
+					dfs(i, -1);
+				}
+			}
+		}
+		for (auto &component : components) {
+			sort(begin(component), end(component));
+			component.erase(unique(begin(component), end(component)), end(component));
+		}
+		for (auto &group : groups) {
+			if (group.size() > 1) {
+				sort(begin(group), end(group));
+				group.erase(unique(begin(group), end(group)), end(group));
 			}
 		}
 	}
 
-	void dfs(int u, int p, int c) {
-		components.back().push_back(u);
-		group[u] = c;
+	void dfs(int u, int p) {
 		used[u] = true;
 		for (auto &v : llink.G[u]) {
 			if (v == p) continue;
-			if (!used[v] && !binary_search(begin(llink.bridges), end(llink.bridges), pair<int, int>(min(u, v), max(u, v)))) {
-				dfs(v, u, c);
+			if (!used[v]) {
+				tmp.emplace_back(min(u, v), max(u, v));
+				dfs(v, u);
+				if (llink.ord[u] > llink.low[v]) continue;
+				components.push_back({});
+				while (true) {
+					auto &[a, b] = tmp.back();
+					components.back().emplace_back(a);
+					components.back().emplace_back(b);
+					groups[a].push_back(groupsize);
+					groups[b].push_back(groupsize);
+					tmp.pop_back();
+					if (min(u, v) == a && max(u, v) == b) break;
+				}
+				groupsize++;
 			}
 		}
 	}
 };
-
 
 int main() {
 	int N, M; cin >> N >> M;
@@ -90,12 +116,12 @@ int main() {
 		G[a].push_back(b);
 		G[b].push_back(a);
 	}
-	TwoEdgeConnectedComponents tecc(G);
-	cout << tecc.components.size() << '\n';
-	for (auto &d : tecc.components) {
-		cout << d.size();
-		for (int i = 0; i < d.size(); i++) {
-			cout << " " << d[i];
+	BiconnectedComponents bc(G);
+	cout << bc.groupsize << '\n';
+	for (int i = 0; i < bc.groupsize; i++) {
+		cout << bc.components[i].size();
+		for (auto &u : bc.components[i]) {
+			cout << ' ' << u;
 		}
 		cout << '\n';
 	}

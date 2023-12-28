@@ -49,8 +49,6 @@ struct LowLink {
 	}
 };
 
-// https://judge.yosupo.jp/problem/two_edge_connected_components
-
 struct TwoEdgeConnectedComponents {
 	using Graph = vector<vector<int>>;
 	LowLink llink;
@@ -81,6 +79,7 @@ struct TwoEdgeConnectedComponents {
 	}
 };
 
+// https://judge.yosupo.jp/problem/two_edge_connected_components
 
 int main() {
 	int N, M; cin >> N >> M;
