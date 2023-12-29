@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 template<typename Monoid>
 struct SegmentTree {
 	using T = typename Monoid::valueType;
@@ -63,7 +64,7 @@ template<typename T>
 struct RMQ {
 	using valueType = T;
 	static T op(T a, T b) { return (max(a, b)); }
-	static inline T id = numeric_limits<T>::min();
+	static inline T id = numeric_limits<T>::lowest();
 };
 
 template<typename T>
@@ -81,7 +82,7 @@ struct SumMaxQuery {
 		if (b == id) return (a);
 		return (valueType(max(a.first, b.first+a.second), a.second + b.second));
 	}
-	static inline valueType id = valueType(-numeric_limits<Data_t>::max(), 0);
+	static inline valueType id = valueType(numeric_limits<Data_t>::lowest(), 0);
 };
 
 template<typename Data_t>
@@ -93,6 +94,18 @@ struct SumMinQuery {
 		return (valueType(min(a.first, b.first+a.second), a.second + b.second));
 	}
 	static inline valueType id = valueType(numeric_limits<Data_t>::max(), 0);
+};
+
+template<unsigned int MOD>
+struct RollingHashQuery {
+	using Mint = Modint<MOD>;
+	using T = pair<Mint, Mint>;
+	using valueType = T;
+
+	static inline T id = T(0, 1);
+	static T op(T a, T b) {
+		return (T(a.first*b.second + b.first, a.second * b.second));
+	}
 };
 
 
