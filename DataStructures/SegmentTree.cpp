@@ -67,7 +67,7 @@ struct RMQ {
 };
 
 template<typename T>
-struct RAQ {
+struct RSQ {
 	using valueType = T;
 	static T op(T a, T b) { return (a+b); }
 	static inline T id = 0;
