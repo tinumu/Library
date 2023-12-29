@@ -16,6 +16,20 @@ struct BIT {
 		for (++k; k < dat.size(); k += k & -k) dat[k] += x;
 	}
 	void update(int k, T x) { add(k, x - fold(k, k)); }
+	void updateall(T x) {
+		for (int k = 1; k < (int)dat.size(); k++) {
+			dat[k] += x;
+			int l = k+(k&-k);
+			if (l < dat.size()) dat[l] += dat[k];
+		}
+	}
+	void updateall(const vector<T> &val) {
+		for (int k = 1; k < (int)dat.size(); k++) {
+			dat[k] += val[k-1];
+			int l = k+(k&-k);
+			if (l < dat.size()) dat[l] += dat[k];
+		}
+	}
 
 	T query(int k) {
 		T sum = 0;
