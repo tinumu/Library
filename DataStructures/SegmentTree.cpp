@@ -33,7 +33,7 @@ struct SegmentTree {
 	}
 
 	void updateall(const vector<T> &val) {
-		for (int k = 0; k < val.size(); k++) {
+		for (int k = 0; k < (int)val.size(); k++) {
 			dat[k+size] = val[k];
 		}
 		calc_all();
