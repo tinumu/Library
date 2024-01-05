@@ -18,10 +18,10 @@ struct ReRooting {
 
 	ReRooting(int N) : G(Graph(N)),
 		sdp(vector<Node_t>(N, M::id)), dp(vector<Node_t>(N, M::id)) {}
-
+	
+	//両辺に入れる必要あり 辺の向きごとにコストを変更できるが正しい？
 	void add_edge(int from, int to, const Edge_t &cost) {
 		G[from].push_back({to, cost, M::id, M::id});
-		G[to].push_back({from, cost, M::id, M::id});
 	}
 
 	void dfs1(int u, int p) {
