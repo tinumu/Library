@@ -20,8 +20,8 @@ struct SparseTable {
 		}
 		for (int b = 1; b < bsize; b++) {
 			int t = (1<<(b-1));
-			table[b] = new T[n];
-			for (int i = 0; i < n - t; i++) {
+			table[b] = new T[n-(t<<1)+1];
+			for (int i = 0; i <= n - (t<<1); i++) {
 				table[b][i] = SemiGroup::op(table[b-1][i], table[b-1][i+t]);
 			}
 		}
