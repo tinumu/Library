@@ -40,6 +40,8 @@ struct SegmentTree {
 	}
 
 	void merge(int k, T x) { update(k, Monoid::op(x, dat[k + size])); }
+
+	T get(int k) { return (dat[k+size]); }
 	//[a, b)
 	T query(int a, int b) {
 		T tl = Monoid::id, tr = Monoid::id;
