@@ -1,9 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-template<typename SemiGroup>
+template<typename Band>
 struct SparseTable {
-	using T = typename SemiGroup::valueType;
+	using T = typename Band::valueType;
 	T** table;
 	int* logtable;
 	int bsize;
@@ -22,7 +22,7 @@ struct SparseTable {
 			int t = (1<<(b-1));
 			table[b] = new T[n-(t<<1)+1];
 			for (int i = 0; i <= n - (t<<1); i++) {
-				table[b][i] = SemiGroup::op(table[b-1][i], table[b-1][i+t]);
+				table[b][i] = Band::op(table[b-1][i], table[b-1][i+t]);
 			}
 		}
 		for (int i = 2; i <= n; i++) {
@@ -41,7 +41,7 @@ struct SparseTable {
 	//[l, r)
 	T query(int l, int r) {
 		int length = r - l;
-		return (SemiGroup::op(table[logtable[length]][l], table[logtable[length]][r-(1<<logtable[length])]));
+		return (Band::op(table[logtable[length]][l], table[logtable[length]][r-(1<<logtable[length])]));
 	}
 };
 
