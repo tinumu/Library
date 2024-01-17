@@ -61,7 +61,7 @@ struct LazySegmentTree {
 		dat[k] = x, laz[k] = M::ei;
 		recalc(k);
 	}
-//[a, b)
+	//[a, b)
 	T query(int a, int b) {
 		int l = a + size, r = b + size;
 		T tl = M::ti, tr = M::ti;
