@@ -15,13 +15,23 @@ struct ReRooting {
 
 	Graph G;
 	vector<Node_t> sdp, dp;
+	vector<Node_t> node_data; //必要なときがあるかはわからないが入れておく。
 
 	ReRooting(int N) : G(Graph(N)),
-		sdp(vector<Node_t>(N, M::id)), dp(vector<Node_t>(N, M::id)) {}
-	
-	//両辺に入れる必要あり 辺の向きごとにコストを変更できるが正しい？
+		sdp(vector<Node_t>(N, M::id)), dp(vector<Node_t>(N, M::id)),
+		node_data(vector<Node_t>(N, M::id)) {}
+
+	ReRooting(int N, const vector<Node_t> &dat) : G(Graph(N)),
+		sdp(dat), dp(vector<Node_t>(N, M::id)),
+		node_data(dat) {}
+
+	//辺の向きごとにコストを変更できるが正しい dp になる？
 	void add_edge(int from, int to, const Edge_t &cost) {
 		G[from].push_back({to, cost, M::id, M::id});
+	}
+	void add_edge_both(int a, int b, const Edge_t &cost) {
+		add_edge(a, b, cost);
+		add_edge(b, a, cost);
 	}
 
 	void dfs1(int u, int p) {
@@ -34,7 +44,7 @@ struct ReRooting {
 	}
 
 	void dfs2(int u, Node_t d_par, int p) {
-		Node_t cur{M::id};
+		Node_t cur = node_data[u];
 		for (int i = 0; i < (int)G[u].size(); i++) {
 			auto &e = G[u][i];
 			e.ndp = cur;
@@ -42,7 +52,7 @@ struct ReRooting {
 			cur = M::f(cur, e.dp);
 		}
 		dp[u] = cur;
-		cur = M::id;
+		cur = node_data[u];
 		for (int i = (int)G[u].size()-1; i >= 0; i--) {
 			auto &e = G[u][i];
 			if (e.to != p) dfs2(e.to, M::f(cur, e.ndp), u);
@@ -57,4 +67,5 @@ struct ReRooting {
 		return (dp);
 	}
 };
+
 
